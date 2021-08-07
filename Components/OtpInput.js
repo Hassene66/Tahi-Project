@@ -42,14 +42,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     ...Platform.select({
       ios: {
-        shadowColor: 'red',
-        shadowOffset: {height: 7, height: 7},
+        shadowColor: 'rgba(255,78,54,18)',
+        shadowOffset: {height: 7, width: 7},
         shadowOpacity: 1,
         shadowRadius: 10,
       },
       android: {
         elevation: 10,
-        shadowColor: 'red',
+        shadowColor: 'rgba(255,78,54,18)',
       },
     }),
   },

@@ -7,7 +7,11 @@ const ConfirmationButton = ({
   label = 'Test',
 }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={{justifyContent: 'flex-end'}}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        justifyContent: 'flex-end',
+      }}>
       <LinearGradient
         colors={['#FF6921', '#FFD051']}
         start={{x: 0, y: 0}}
