@@ -1,8 +1,11 @@
-import React from 'react';
-import SignIn from './Screens/SignIn';
 import SignInNextStep from './Screens/SignInNextStep';
+import SplashScreen from 'react-native-splash-screen';
+import React, {useEffect} from 'react';
 
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return <SignInNextStep />;
 };
 
