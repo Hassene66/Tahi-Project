@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import Background from '../Components/Background';
 import ConfirmationButton from '../Components/ConfirmationButton';
 import Logo from '../Components/Logo';
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Cairo-Bold',
   },
   resendTextContainer: {
-    alignItems: 'flex-start',
+    alignItems: 'flex-end',
     paddingTop: 15,
   },
   textContainer: {

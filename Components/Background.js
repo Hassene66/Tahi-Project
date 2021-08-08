@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-const background = ({children}) => {
+const Background = ({children}) => {
   return (
     <LinearGradient
       colors={['#FEE4D7', '#FFEFE7', '#FFF8F4']}
@@ -12,7 +12,7 @@ const background = ({children}) => {
   );
 };
 
-export default background;
+export default Background;
 
 const styles = StyleSheet.create({
   bg: {

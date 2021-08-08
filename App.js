@@ -1,12 +1,11 @@
+import React from 'react';
+import {I18nManager} from 'react-native';
+import SignIn from './Screens/SignIn';
 import SignInNextStep from './Screens/SignInNextStep';
-import SplashScreen from 'react-native-splash-screen';
-import React, {useEffect} from 'react';
-
+import Subscribe from './Screens/Subscribe';
 const App = () => {
-  useEffect(() => {
-    SplashScreen.hide();
-  }, []);
-  return <SignInNextStep />;
+  I18nManager.forceRTL(true);
+  return <Subscribe />;
 };
 
 export default App;

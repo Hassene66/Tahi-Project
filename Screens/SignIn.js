@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {InputPhone} from '@my_name_is_nero/input-phone';
 
 import {StyleSheet, View} from 'react-native';
@@ -12,21 +12,21 @@ const SignIn = () => {
   const data = [
     {
       id: 1,
-      label: 'الشيف',
+      label: 'عميل',
     },
     {
       id: 2,
-      label: 'عميل',
+      label: 'الشيف',
     },
   ];
-  const [phoneNumber, setPhoneNumber] = React.useState({
+  const [phoneNumber, setPhoneNumber] = useState({
     countryCode: '',
     phoneNumber: '',
   });
   return (
     <Background>
       <Logo />
-      <Title text="تسجيل الدخول" />
+      <Title text="تسجيل الدخول" titleStyle={{marginBottom: 20}} />
       <InputPhone
         placeholderSearch="بحث"
         placeholder="رقم الهاتف"
