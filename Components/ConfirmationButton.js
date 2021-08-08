@@ -3,7 +3,9 @@ import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 const ConfirmationButton = ({
-  onPress = () => console.log(),
+  onPress = () => {
+    console.log();
+  },
   label = 'Test',
 }) => {
   return (

@@ -4,11 +4,13 @@ import Background from '../Components/Background';
 import ConfirmationButton from '../Components/ConfirmationButton';
 import Logo from '../Components/Logo';
 import OtpInput from '../Components/OtpInput';
+import PreviousPageNavigation from '../Components/PreviousPageNavigation';
 const SignInNextStep = ({phoneNum = 92221321321}) => {
   return (
     <>
       <Background>
-        <Logo />
+        <PreviousPageNavigation />
+        <Logo marginTp={20} />
         <Text style={styles.text}>التحقق من رقم الجوال</Text>
         <View style={styles.textContainer}>
           <Text style={styles.text2}>
