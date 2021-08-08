@@ -21,6 +21,7 @@ const OtpInput = () => {
         }}
         placeholderCharacter="&#8212;"
         placeholderTextColor="#bfbfbf"
+        autoFocusOnLoad
       />
     </View>
   );
