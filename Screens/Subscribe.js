@@ -7,6 +7,8 @@ import Logo from '../Components/Logo';
 import RadioButton from '../Components/RadioButton';
 import Title from '../Components/Title';
 import * as yup from 'yup';
+import PreviousPageNavigation from '../Components/PreviousPageNavigation';
+
 const Subscribe = () => {
   const data1 = [
     {
@@ -56,6 +58,7 @@ const Subscribe = () => {
   };
   return (
     <Background>
+      <PreviousPageNavigation />
       <Logo />
       <Title text="مستخدم جديد" />
       <ScrollView>

@@ -4,6 +4,7 @@ import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+import Subscribe from './Screens/Subscribe';
 import SignInNextStep from './Screens/SignInNextStep';
 import SignIn from './Screens/SignIn';
 
@@ -20,17 +21,12 @@ const App = () => {
 };
 const Stack = createNativeStackNavigator();
 const StackNavigator = () => (
-  <Stack.Navigator initialRouteName="SignIn">
-    <Stack.Screen
-      name="SignIn"
-      component={SignIn}
-      options={{headerShown: false}}
-    />
-    <Stack.Screen
-      name="SignInNextStep"
-      component={SignInNextStep}
-      options={{headerShown: false}}
-    />
+  <Stack.Navigator
+    screenOptions={{headerShown: false}}
+    initialRouteName="SignIn">
+    <Stack.Screen name="SignIn" component={SignIn} />
+    <Stack.Screen name="SignInNextStep" component={SignInNextStep} />
+    <Stack.Screen name="Subscribe" component={Subscribe} />
   </Stack.Navigator>
 );
 

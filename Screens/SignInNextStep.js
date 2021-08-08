@@ -1,11 +1,15 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+
 import Background from '../Components/Background';
 import ConfirmationButton from '../Components/ConfirmationButton';
 import Logo from '../Components/Logo';
 import OtpInput from '../Components/OtpInput';
 import PreviousPageNavigation from '../Components/PreviousPageNavigation';
+import {useNavigation} from '@react-navigation/native';
+
 const SignInNextStep = ({phoneNum = 92221321321}) => {
+  const navigation = useNavigation();
   return (
     <>
       <Background>
@@ -25,7 +29,10 @@ const SignInNextStep = ({phoneNum = 92221321321}) => {
           </Text>
         </View>
         <View style={styles.btn}>
-          <ConfirmationButton label="تسجيل الدخول" />
+          <ConfirmationButton
+            label="تسجيل الدخول"
+            onPress={() => navigation.navigate('Subscribe')}
+          />
         </View>
       </Background>
     </>

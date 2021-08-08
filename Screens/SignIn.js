@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {InputPhone} from '@my_name_is_nero/input-phone';
 
 import {StyleSheet, View} from 'react-native';
 import RadioButton from '../Components/RadioButton';
@@ -27,13 +26,6 @@ const SignIn = ({navigation}) => {
     <Background>
       <Logo marginTp={100} />
       <Title text="تسجيل الدخول" titleStyle={{marginBottom: 20}} />
-      <InputPhone
-        placeholderSearch="بحث"
-        placeholder="رقم الهاتف"
-        value={phoneNumber}
-        onChangeText={setPhoneNumber}
-        containerStyle={{}}
-      />
       <RadioButton data={data} onChangeValue={() => console.log('Changed')} />
       <View style={styles.btnContainer}>
         <ConfirmationButton
