@@ -8,7 +8,7 @@ import Logo from '../Components/Logo';
 import Background from '../Components/Background';
 import Title from '../Components/Title';
 
-const SignIn = () => {
+const SignIn = ({navigation}) => {
   const data = [
     {
       id: 1,
@@ -25,7 +25,7 @@ const SignIn = () => {
   });
   return (
     <Background>
-      <Logo />
+      <Logo marginTp={100} />
       <Title text="تسجيل الدخول" titleStyle={{marginBottom: 20}} />
       <InputPhone
         placeholderSearch="بحث"
@@ -37,7 +37,7 @@ const SignIn = () => {
       <RadioButton data={data} onChangeValue={() => console.log('Changed')} />
       <View style={styles.btnContainer}>
         <ConfirmationButton
-          onPress={() => console.log('Pressed')}
+          onPress={() => navigation.navigate('SignInNextStep')}
           label="التالي"
         />
       </View>
