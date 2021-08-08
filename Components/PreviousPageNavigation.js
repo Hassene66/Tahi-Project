@@ -11,7 +11,7 @@ const PreviousPageNavigation = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={() => navigation.navigate('SignIn')}>
+      <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
         <View style={styles.icon}>
           <FontAwesome5 name="chevron-right" size={15} />
         </View>
@@ -22,7 +22,7 @@ const PreviousPageNavigation = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
   },
   icon: {
     height: 50,
