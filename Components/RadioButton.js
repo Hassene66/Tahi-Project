@@ -1,9 +1,14 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import RadioButtonRN from 'radio-buttons-react-native';
+import RadioButtonRN from './RadioButtonRN';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const RadioButton = ({onChangeValue, data, initial = -1}) => {
+const RadioButton = ({
+  onChangeValue,
+  data,
+  initial = -1,
+  modifiedVersion = false,
+}) => {
   return (
     <RadioButtonRN
       data={data}
@@ -17,6 +22,7 @@ const RadioButton = ({onChangeValue, data, initial = -1}) => {
       boxDeactiveBgColor="white"
       activeColor="#FABD30"
       icon={<Icon name="check-circle" size={25} color="#FF6B21" />}
+      modifiedVersion={modifiedVersion}
     />
   );
 };
