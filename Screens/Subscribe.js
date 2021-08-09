@@ -64,6 +64,7 @@ const Subscribe = () => {
       <ScrollView>
         <Text style={styles.text}>نوع المستخدم</Text>
         <RadioButton
+          modifiedVersion={true}
           initial={1}
           data={data1}
           onChangeValue={handleUserTypeChange}
@@ -83,7 +84,11 @@ const Subscribe = () => {
         <Text style={[styles.text, {marginTop: 10}]}>
           الجنس<Text style={styles.lightText}> ( اختياري )</Text>
         </Text>
-        <RadioButton data={data2} onChangeValue={handleSelectGender} />
+        <RadioButton
+          modifiedVersion={true}
+          data={data2}
+          onChangeValue={handleSelectGender}
+        />
         <ConfirmationButton label="تسجيل" />
       </ScrollView>
     </Background>

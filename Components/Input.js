@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     height: 65,
     overflow: 'hidden',
     shadowOpacity: 0.5,
-    elevation: 15,
+    elevation: 10,
     shadowOffset: {width: 15, height: 15},
     shadowColor: 'rgba(255,78,54,18)',
   },
