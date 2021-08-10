@@ -8,6 +8,7 @@ import RadioButton from '../Components/RadioButton';
 import Title from '../Components/Title';
 import * as yup from 'yup';
 import PreviousPageNavigation from '../Components/PreviousPageNavigation';
+import Picker from '../Components/Picker';
 
 const Subscribe = () => {
   const data1 = [
@@ -59,9 +60,9 @@ const Subscribe = () => {
   return (
     <Background>
       <PreviousPageNavigation />
-      <Logo />
-      <Title text="مستخدم جديد" />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Logo />
+        <Title text="مستخدم جديد" />
         <Text style={styles.text}>نوع المستخدم</Text>
         <RadioButton
           modifiedVersion={true}
@@ -81,6 +82,8 @@ const Subscribe = () => {
           value={surname}
           onChangeValue={handleSurnameChange}
         />
+        <Picker placeholder="المدينة" />
+        <Picker placeholder="المنطقة" />
         <Text style={[styles.text, {marginTop: 10}]}>
           الجنس<Text style={styles.lightText}> ( اختياري )</Text>
         </Text>
