@@ -21,16 +21,6 @@ const Picker = ({
     {id: 11, label: 'بريدة'},
     {id: 12, label: 'مدينة الخبر'},
     {id: 13, label: 'تبوك'},
-    {id: 9, label: 'الطائف'},
-    {id: 10, label: 'الدمام'},
-    {id: 11, label: 'بريدة'},
-    {id: 12, label: 'مدينة الخبر'},
-    {id: 13, label: 'تبوك'},
-    {id: 9, label: 'الطائف'},
-    {id: 10, label: 'الدمام'},
-    {id: 11, label: 'بريدة'},
-    {id: 12, label: 'مدينة الخبر'},
-    {id: 13, label: 'تبوك'},
   ];
   const [isVisible, setIsVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');

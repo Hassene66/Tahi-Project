@@ -11,6 +11,7 @@ import HomePage from './Screens/HomePage';
 import Card from './Components/Card';
 import LogoV2 from './Components/LogoV2';
 import Picker from './Components/Picker';
+import phoneInput from './Components/PhoneInput';
 
 const App = () => {
   I18nManager.forceRTL(true);

@@ -9,6 +9,7 @@ import Title from '../Components/Title';
 import * as yup from 'yup';
 import PreviousPageNavigation from '../Components/PreviousPageNavigation';
 import Picker from '../Components/Picker';
+import PhoneInput from '../Components/PhoneInput';
 
 const Subscribe = () => {
   const data1 = [
@@ -82,6 +83,7 @@ const Subscribe = () => {
           value={surname}
           onChangeValue={handleSurnameChange}
         />
+        <PhoneInput />
         <Picker placeholder="المدينة" />
         <Picker placeholder="المنطقة" />
         <Text style={[styles.text, {marginTop: 10}]}>
