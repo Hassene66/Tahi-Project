@@ -7,8 +7,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Subscribe from './Screens/Subscribe';
 import SignInNextStep from './Screens/SignInNextStep';
 import SignIn from './Screens/SignIn';
+import Picker from './Components/Picker';
 
 const App = () => {
+  I18nManager.forceRTL(true);
   useEffect(() => {
     SplashScreen.hide();
   }, []);
@@ -17,13 +19,12 @@ const App = () => {
       <StackNavigator />
     </NavigationContainer>
   );
-  I18nManager.forceRTL(true);
 };
 const Stack = createNativeStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator
     screenOptions={{headerShown: false}}
-    initialRouteName="SignIn">
+    initialRouteName="Subscribe">
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignInNextStep" component={SignInNextStep} />
     <Stack.Screen name="Subscribe" component={Subscribe} />

@@ -26,7 +26,12 @@ const SignIn = ({navigation}) => {
     <Background>
       <Logo marginTp={100} />
       <Title text="تسجيل الدخول" titleStyle={{marginBottom: 20}} />
-      <RadioButton data={data} onChangeValue={() => console.log('Changed')} />
+      <RadioButton
+        initial={1}
+        modifiedVersion={true}
+        data={data}
+        onChangeValue={() => console.log('Changed')}
+      />
       <View style={styles.btnContainer}>
         <ConfirmationButton
           onPress={() => navigation.navigate('SignInNextStep')}
