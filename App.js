@@ -7,6 +7,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Subscribe from './Screens/Subscribe';
 import SignInNextStep from './Screens/SignInNextStep';
 import SignIn from './Screens/SignIn';
+import HomePage from './Screens/HomePage';
+import Card from './Components/Card';
+import LogoV2 from './Components/LogoV2';
 import Picker from './Components/Picker';
 
 const App = () => {
@@ -28,6 +31,7 @@ const StackNavigator = () => (
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignInNextStep" component={SignInNextStep} />
     <Stack.Screen name="Subscribe" component={Subscribe} />
+    <Stack.Screen name="HomePage" component={HomePage} />
   </Stack.Navigator>
 );
 
