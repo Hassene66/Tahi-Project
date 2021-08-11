@@ -7,6 +7,7 @@ import Logo from '../Components/Logo';
 import Background from '../Components/Background';
 import Title from '../Components/Title';
 import PhoneInput from '../Components/PhoneInput';
+import * as yup from 'yup';
 
 const SignIn = ({navigation}) => {
   const data = [
@@ -19,9 +20,15 @@ const SignIn = ({navigation}) => {
       label: 'الشيف',
     },
   ];
-  const [phoneNumber, setPhoneNumber] = useState({
-    countryCode: '',
-    phoneNumber: '',
+  const schema = yup.object().shape({
+    name: yup.string().required('الرجاء إدخال الإسم'),
+    surname: yup.string().required('الرجاء إدخال اللقب'),
+    phoneNumber: yup
+      .number()
+      .typeError(' إدخال الرجاء أرقام')
+      .required('الرجاء إدخال رقم الهاتف'),
+    country: yup.object().required('الرجاء إدخال المدينة').nullable(),
+    region: yup.object().required('الرجاء إدخال المنطقة').nullable(),
   });
   return (
     <Background>

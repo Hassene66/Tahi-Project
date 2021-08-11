@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import RadioButtonRN from './RadioButtonRN';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Title from './Title';
-const ItemRadioBtn = ({title = '', data, onPress, initial = -1}) => {
+const ItemRadioBtn = ({title = '', data, onPress, initial = 1}) => {
   return (
     <>
       <Title text={title} titleStyle={styles.titleStyle} />

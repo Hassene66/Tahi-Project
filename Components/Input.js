@@ -2,32 +2,45 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {TextInput, HelperText} from 'react-native-paper';
 import * as yup from 'yup';
-
+import ErrorMessage from './ErrorMessage';
+import {useFormikContext} from 'formik';
 const Input = ({
   label = 'لوريم ايبسوم ',
   style = {},
-  handleChangeText = text => console.log(text),
+  keyboardType = 'default',
+  name,
+  show = true,
 }) => {
-  const [isValid, setIsValid] = useState(false);
+  const {handleChange, setFieldTouched, errors} = useFormikContext();
+
   return (
-    <View style={[styles.inputContainer, {...style}]}>
-      <TextInput
-        style={styles.input}
-        label={label}
-        textAlign="right"
-        underlineColor="transparent"
-        onChangeText={handleChangeText}
-        theme={{
-          fonts: {
-            regular: {
-              fontFamily: 'Cairo-Regular',
+    <>
+      <View
+        style={[
+          styles.inputContainer,
+          errors[name] && styles.error,
+          {...style},
+        ]}>
+        <TextInput
+          style={styles.input}
+          label={label}
+          keyboardType={keyboardType}
+          textAlign="right"
+          underlineColor="transparent"
+          onChangeText={handleChange(name)}
+          onBlur={() => setFieldTouched(name)}
+          theme={{
+            fonts: {
+              regular: {
+                fontFamily: 'Cairo-Regular',
+              },
             },
-          },
-          colors: {primary: '#FF6B21', text: 'black'},
-        }}
-      />
-      <HelperText></HelperText>
-    </View>
+            colors: {primary: '#FF6B21', text: 'black'},
+          }}
+        />
+      </View>
+      {show && <ErrorMessage error={errors[name]} />}
+    </>
   );
 };
 
@@ -35,7 +48,8 @@ export default Input;
 
 const styles = StyleSheet.create({
   inputContainer: {
-    marginVertical: 15,
+    marginTop: 20,
+    marginBottom: 5,
     borderRadius: 10,
     height: 65,
     overflow: 'hidden',
@@ -51,5 +65,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundColor: 'white',
     fontWeight: null,
+  },
+  error: {
+    borderWidth: 2,
+    borderColor: 'red',
   },
 });

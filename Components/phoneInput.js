@@ -1,15 +1,27 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import ErrorMessage from './ErrorMessage';
 import Input from './Input';
+import {useFormikContext} from 'formik';
 
-const PhoneInput = () => {
+const PhoneInput = ({name, show = true}) => {
+  const {errors} = useFormikContext();
   return (
-    <View style={styles.container}>
-      <View style={styles.country}>
-        <Image source={require('../assets/images/country.png')} />
-        <Text style={styles.text}>+699</Text>
+    <View>
+      <View style={styles.container}>
+        <View style={styles.country}>
+          <Image source={require('../assets/images/country.png')} />
+          <Text style={styles.text}>+699</Text>
+        </View>
+        <Input
+          name="phoneNumber"
+          keyboardType="number-pad"
+          label="رقم الهاتف"
+          style={styles.PhoneInput}
+          show={show}
+        />
       </View>
-      <Input label="رقم الهاتف" style={styles.PhoneInput} />
+      <ErrorMessage error={errors[name]} />
     </View>
   );
 };
@@ -21,8 +33,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  PhoneInput: {flex: 4},
+  PhoneInput: {flex: 4, flexDirection: 'column'},
   country: {
+    marginTop: 15,
     flex: 1,
     padding: 15,
     flexDirection: 'row',
