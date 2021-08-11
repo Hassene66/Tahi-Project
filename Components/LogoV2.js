@@ -1,9 +1,10 @@
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {View} from 'react-native';
+import {TouchableWithoutFeedback, View} from 'react-native';
 import Logo from './Logo';
 import RoundIcon from './RoundIcon';
 
-const LogoV2 = () => {
+const LogoV2 = ({navigation}) => {
   return (
     <View style={{flexDirection: 'row'}}>
       <View
@@ -38,6 +39,7 @@ const LogoV2 = () => {
           bgColor="#EDEBEB"
           marginHorizontal={5}
         />
+
         <RoundIcon
           title="heart"
           solid
@@ -45,6 +47,7 @@ const LogoV2 = () => {
           color="#464646"
           bgColor="#EDEBEB"
           marginHorizontal={5}
+          pageName="FavouriteItemScreen"
         />
       </View>
     </View>

@@ -11,7 +11,9 @@ import HomePage from './Screens/HomePage';
 import Card from './Components/Card';
 import LogoV2 from './Components/LogoV2';
 import Picker from './Components/Picker';
-import phoneInput from './Components/PhoneInput';
+
+import FavouriteItemScreen from './Screens/FavouriteItemScreen';
+
 
 const App = () => {
   I18nManager.forceRTL(true);
@@ -28,11 +30,12 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator
     screenOptions={{headerShown: false}}
-    initialRouteName="Subscribe">
+    initialRouteName="HomePage">
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignInNextStep" component={SignInNextStep} />
     <Stack.Screen name="Subscribe" component={Subscribe} />
     <Stack.Screen name="HomePage" component={HomePage} />
+    <Stack.Screen name="FavouriteItemScreen" component={FavouriteItemScreen} />
   </Stack.Navigator>
 );
 

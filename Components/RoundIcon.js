@@ -1,11 +1,8 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-} from 'react-native';
+import {View, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {useNavigation} from '@react-navigation/native';
+
 const RoundIcon = ({
   title = 'chevron-right',
   solid = false,
@@ -13,10 +10,13 @@ const RoundIcon = ({
   color = 'black',
   bgColor,
   marginHorizontal,
+  pageName = undefined,
 }) => {
+  const navigation = useNavigation();
   return (
     <View style={[styles.container, {marginHorizontal: marginHorizontal}]}>
-      <TouchableWithoutFeedback onPress={() => console.log('touched')}>
+      <TouchableWithoutFeedback
+        onPress={pageName && (() => navigation.navigate(pageName))}>
         <View style={[styles.icon, {backgroundColor: bgColor}]}>
           <FontAwesome5
             name={title}

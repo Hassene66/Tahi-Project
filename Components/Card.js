@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Image,
@@ -7,31 +7,30 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import Background from './Background';
 import RoundIcon from './RoundIcon';
 import Title from './Title';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import uuid from 'react-native-uuid';
 
-const Card = () => {
-  const [liked, setLiked] = useState(false);
+const Card = ({data: item, isRecent, isLiked, setLiked, withBorder}) => {
   return (
     <View
       // the card view
       style={{
         backgroundColor: 'white',
-        borderRadius: 30,
-        borderColor: '#FABD30',
         width: 380,
-        height: 260,
-        borderWidth: 2,
+        height: isRecent ? 270 : 240,
+        borderRadius: 30,
+        borderWidth: withBorder ? 2 : 0,
+        borderColor: '#FABD30',
         overflow: 'hidden',
         padding: 18,
       }}>
       <View
         // the user view
         style={{
-          height: 90,
+          height: isRecent ? 110 : 75,
           flexDirection: 'row',
         }}>
         <View
@@ -60,7 +59,7 @@ const Card = () => {
             }}>
             <View style={{flex: 1}}>
               <Title
-                text="علي عبد الله"
+                text={item.name}
                 titleStyle={{
                   fontSize: 17,
                   marginTop: 0,
@@ -76,7 +75,9 @@ const Card = () => {
                 justifyContent: 'flex-end',
                 paddingHorizontal: 13,
               }}>
-              <Text style={{color: '#FF6B21', paddingLeft: 6}}>4,4</Text>
+              <Text style={{color: '#FF6B21', paddingLeft: 6}}>
+                {item.rating}
+              </Text>
               <FontAwesome5 name="star" color="#FF6B21" size={22} solid />
             </View>
             <View
@@ -85,12 +86,12 @@ const Card = () => {
                 justifyContent: 'flex-start',
                 alignItems: 'flex-end',
               }}>
-              <TouchableWithoutFeedback onPress={() => setLiked(!liked)}>
+              <TouchableWithoutFeedback onPress={() => setLiked(item.id)}>
                 <FontAwesome5
                   name="heart"
-                  color={liked ? 'red' : 'black'}
+                  color={isLiked ? 'red' : 'black'}
                   size={25}
-                  solid={liked}
+                  solid={isLiked}
                 />
               </TouchableWithoutFeedback>
             </View>
@@ -99,23 +100,33 @@ const Card = () => {
           <View
             style={{
               flexDirection: 'row',
-              flex: 1,
+              height: 20,
               alignItems: 'flex-start',
+              marginBottom: 10,
             }}>
             <View style={{flex: 1}}>
-              <Text>مكه المكرمة</Text>
+              <Text>{item.place}</Text>
             </View>
             <View
               style={{
                 flex: 2,
                 alignItems: 'center',
               }}>
-              <Text>منطقة باب المنارة</Text>
+              <Text>{item.location}</Text>
             </View>
             <View style={{flex: 1, alignItems: 'flex-end'}}>
-              <Text style={{color: '#FF6B21'}}>(15 طلب)</Text>
+              <Text style={{color: '#FF6B21'}}>
+                ({item.numberOfRequests} طلب)
+              </Text>
             </View>
           </View>
+          {isRecent && (
+            <View
+              style={{flexDirection: 'row', marginBottom: isRecent ? 9 : 0}}>
+              <FontAwesome5 name="clock" size={20} style={{marginRight: 7}} />
+              <Text>منذ 3 ساعات</Text>
+            </View>
+          )}
         </View>
       </View>
       <View
@@ -124,71 +135,35 @@ const Card = () => {
           flexDirection: 'row',
           justifyContent: 'space-around',
         }}>
-        <View
-          style={{
-            backgroundColor: '#EFFCFF',
-            borderRadius: 10,
-            paddingHorizontal: 10,
-            justifyContent: 'center',
-          }}>
-          <Title
-            text="المفطح"
-            titleStyle={{marginTop: 0, color: '#30D2FA', fontSize: 12}}
-          />
-        </View>
-        <View
-          style={{
-            backgroundColor: '#EFFCFF',
-            borderRadius: 10,
-            paddingHorizontal: 10,
-            justifyContent: 'center',
-          }}>
-          <Title
-            text="الكبسة"
-            titleStyle={{marginTop: 0, color: '#30D2FA', fontSize: 12}}
-          />
-        </View>
-        <View
-          style={{
-            backgroundColor: '#EFFCFF',
-            borderRadius: 10,
-            paddingHorizontal: 10,
-            justifyContent: 'center',
-          }}>
-          <Title
-            text="الكبسة"
-            titleStyle={{marginTop: 0, color: '#30D2FA', fontSize: 12}}
-          />
-        </View>
-        <View
-          style={{
-            backgroundColor: '#EFFCFF',
-            borderRadius: 10,
-            paddingHorizontal: 10,
-            justifyContent: 'center',
-          }}>
-          <Title
-            text="المعصوب"
-            titleStyle={{marginTop: 0, color: '#30D2FA', fontSize: 12}}
-          />
-        </View>
-        <View
-          style={{
-            backgroundColor: '#EFFCFF',
-            borderRadius: 10,
-            paddingHorizontal: 10,
-            justifyContent: 'center',
-          }}>
-          <Title
-            text=". . ."
-            titleStyle={{
-              marginTop: 0,
-              color: '#30D2FA',
-              fontSize: 12,
-              fontWeight: 'bold',
-            }}
-          />
-        </View>
+        {item.tags.map(tag => (
+          <View
+            key={uuid.v4()}
+            style={{
+              backgroundColor: '#EFFCFF',
+              borderRadius: 10,
+              paddingHorizontal: 10,
+              justifyContent: 'center',
+            }}>
+            <Title
+              text={tag}
+              titleStyle={{marginTop: 0, color: '#30D2FA', fontSize: 12}}
+            />
+          </View>
+        ))}
+        {item.tags.length > 5 && (
+          <View
+            style={{
+              backgroundColor: '#EFFCFF',
+              borderRadius: 10,
+              paddingHorizontal: 10,
+              justifyContent: 'center',
+            }}>
+            <Title
+              text="..."
+              titleStyle={{marginTop: 0, color: '#30D2FA', fontSize: 12}}
+            />
+          </View>
+        )}
       </View>
       <ScrollView horizontal>
         <View
@@ -197,24 +172,11 @@ const Card = () => {
             padding: 13,
             justifyContent: 'space-between',
           }}>
-          <View style={styles.images}>
-            <Image
-              resizeMode="contain"
-              source={require('../assets/images/image1.png')}
-            />
-          </View>
-          <View style={styles.images}>
-            <Image
-              resizeMode="contain"
-              source={require('../assets/images/image2.png')}
-            />
-          </View>
-          <View style={styles.images}>
-            <Image
-              resizeMode="contain"
-              source={require('../assets/images/image3.png')}
-            />
-          </View>
+          {item.imageUrls.map(url => (
+            <View key={uuid.v4()} style={styles.images}>
+              <Image resizeMode="contain" source={url} />
+            </View>
+          ))}
         </View>
       </ScrollView>
     </View>
