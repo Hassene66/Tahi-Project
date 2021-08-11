@@ -11,7 +11,9 @@ import HomePage from './Screens/HomePage';
 import Card from './Components/Card';
 import LogoV2 from './Components/LogoV2';
 import Picker from './Components/Picker';
+
 import FavouriteItemScreen from './Screens/FavouriteItemScreen';
+
 
 const App = () => {
   I18nManager.forceRTL(true);

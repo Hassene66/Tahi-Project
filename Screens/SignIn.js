@@ -6,6 +6,7 @@ import ConfirmationButton from '../Components/ConfirmationButton';
 import Logo from '../Components/Logo';
 import Background from '../Components/Background';
 import Title from '../Components/Title';
+import PhoneInput from '../Components/PhoneInput';
 
 const SignIn = ({navigation}) => {
   const data = [
@@ -32,6 +33,7 @@ const SignIn = ({navigation}) => {
         data={data}
         onChangeValue={() => console.log('Changed')}
       />
+      <PhoneInput />
       <View style={styles.btnContainer}>
         <ConfirmationButton
           onPress={() => navigation.navigate('SignInNextStep')}
