@@ -10,7 +10,7 @@ import * as yup from 'yup';
 import PreviousPageNavigation from '../Components/PreviousPageNavigation';
 import Picker from '../Components/Picker';
 import PhoneInput from '../Components/PhoneInput';
-
+import Form from '../Components/AppForm';
 const Subscribe = () => {
   const data1 = [
     {
@@ -32,69 +32,50 @@ const Subscribe = () => {
       label: 'أنثى',
     },
   ];
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [gender, setGender] = useState(null);
-  const [userType, SetUserType] = useState(data1[0].label);
   const schema = yup.object().shape({
-    name: yup
-      .string()
-      .typeError('الرجاء إدخال أحرف')
-      .min(1, 'الرجاء إدخال الإسم'),
-    surname: yup
-      .string()
-      .typeError('الرجاء إدخال أحرف')
-      .min(1, 'الرجاء إدخال اللقب'),
+    name: yup.string().required('الرجاء إدخال الإسم'),
+    surname: yup.string().required('الرجاء إدخال اللقب'),
+    phoneNumber: yup
+      .number()
+      .typeError(' إدخال الرجاء أرقام')
+      .required('الرجاء إدخال رقم الهاتف'),
+    country: yup.object().required('الرجاء إدخال المدينة').nullable(),
+    region: yup.object().required('الرجاء إدخال المنطقة').nullable(),
   });
-  const handleSelectGender = gender => {
-    setGender(() => gender);
-  };
-  const handleUserTypeChange = userType => {
-    SetUserType(() => userType);
-  };
-  const handleNameChange = name => {
-    setName(() => name);
-  };
-  const handleSurnameChange = surname => {
-    setName(() => surname);
-  };
   return (
     <Background>
-      <PreviousPageNavigation />
       <ScrollView showsVerticalScrollIndicator={false}>
+        <PreviousPageNavigation />
         <Logo />
         <Title text="مستخدم جديد" />
         <Text style={styles.text}>نوع المستخدم</Text>
-        <RadioButton
-          modifiedVersion={true}
-          initial={1}
-          data={data1}
-          onChangeValue={handleUserTypeChange}
-        />
-        <Input
-          label="الإسم"
-          style={{marginVertical: 25}}
-          value={name}
-          onChangeValue={handleNameChange}
-        />
-        <Input
-          label="اللقب"
-          style={{marginVertical: 25}}
-          value={surname}
-          onChangeValue={handleSurnameChange}
-        />
-        <PhoneInput />
-        <Picker placeholder="المدينة" />
-        <Picker placeholder="المنطقة" />
-        <Text style={[styles.text, {marginTop: 10}]}>
-          الجنس<Text style={styles.lightText}> ( اختياري )</Text>
-        </Text>
-        <RadioButton
-          modifiedVersion={true}
-          data={data2}
-          onChangeValue={handleSelectGender}
-        />
-        <ConfirmationButton label="تسجيل" />
+        <Form
+          initialValues={{
+            name: '',
+            surname: '',
+            phoneNumber: '',
+            country: null,
+            region: null,
+          }}
+          onSubmit={values => console.log(values)}
+          validationSchema={schema}>
+          <RadioButton
+            modifiedVersion={true}
+            initial={1}
+            data={data1}
+            name="userType"
+          />
+          <Input name="name" label="الإسم" />
+          <Input name="surname" label="اللقب" />
+          <PhoneInput name="phoneNumber" show={false} />
+          <Picker placeholder="المدينة" name="country" />
+          <Picker placeholder="المنطقة" name="region" />
+          <Text style={[styles.text, {marginTop: 10}]}>
+            الجنس<Text style={styles.lightText}> ( اختياري )</Text>
+          </Text>
+          <RadioButton name="userGender" modifiedVersion={true} data={data2} />
+          <ConfirmationButton label="تسجيل" />
+        </Form>
       </ScrollView>
     </Background>
   );

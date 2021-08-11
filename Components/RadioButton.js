@@ -2,18 +2,14 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import RadioButtonRN from './RadioButtonRN';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
-const RadioButton = ({
-  onChangeValue,
-  data,
-  initial = -1,
-  modifiedVersion = false,
-}) => {
+import {useFormikContext} from 'formik';
+const RadioButton = ({data, initial = -1, modifiedVersion = false, name}) => {
+  const {setFieldValue} = useFormikContext();
   return (
     <RadioButtonRN
       data={data}
       initial={initial}
-      selectedBtn={onChangeValue}
+      selectedBtn={item => setFieldValue(name, item)}
       textStyle={styles.textStyle}
       style={{flexDirection: 'row', marginVertical: 7}}
       duration={250}
