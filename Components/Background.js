@@ -2,10 +2,14 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-const Background = ({children}) => {
+const Background = ({children, isInverted}) => {
   return (
     <LinearGradient
-      colors={['#FEE4D7', '#FFEFE7', '#FFF8F4']}
+      colors={
+        isInverted
+          ? ['#FFF8F4', '#FFEFE7', '#FEE4D7']
+          : ['#FEE4D7', '#FFEFE7', '#FFF8F4']
+      }
       style={styles.bg}>
       {children}
     </LinearGradient>

@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import RoundIcon from './RoundIcon';
 import Title from './Title';
@@ -19,7 +20,7 @@ const Card = ({data: item, isRecent, isLiked, setLiked, withBorder}) => {
       // the card view
       style={{
         backgroundColor: 'white',
-        width: 380,
+        width: Math.floor(Dimensions.get('window').width - 36),
         height: isRecent ? 270 : 240,
         borderRadius: 30,
         borderWidth: withBorder ? 2 : 0,
