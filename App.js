@@ -11,7 +11,6 @@ import HomePage from './Screens/HomePage';
 import Card from './Components/Card';
 import LogoV2 from './Components/LogoV2';
 import Picker from './Components/Picker';
-import phoneInput from './Components/PhoneInput';
 import ErrorMessage from './Components/ErrorMessage';
 
 import FavouriteItemScreen from './Screens/FavouriteItemScreen';
@@ -19,7 +18,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Background from './Components/Background';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import LinearGradient from 'react-native-linear-gradient';
-
 
 const App = () => {
   I18nManager.forceRTL(true);
@@ -36,7 +34,7 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator
     screenOptions={{headerShown: false}}
-    initialRouteName="HomePage">
+    initialRouteName="SignIn">
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignInNextStep" component={SignInNextStep} />
     <Stack.Screen name="Subscribe" component={Subscribe} />
