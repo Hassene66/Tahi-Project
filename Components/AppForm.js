@@ -1,5 +1,5 @@
 import React from 'react';
-import {Formik} from 'formik';
+import {Formik, useFormikContext} from 'formik';
 const AppForm = ({initialValues, onSubmit, validationSchema, children}) => {
   return (
     <Formik
@@ -7,8 +7,7 @@ const AppForm = ({initialValues, onSubmit, validationSchema, children}) => {
       isInitialValid={validationSchema.isValidSync(initialValues)}
       initialValues={initialValues}
       onSubmit={onSubmit}
-      validationSchema={validationSchema}
-      enableReinitialize>
+      validationSchema={validationSchema}>
       {() => <>{children}</>}
     </Formik>
   );

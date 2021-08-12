@@ -24,7 +24,7 @@ const SignIn = ({navigation}) => {
   const schema = yup.object().shape({
     phoneNumber: yup
       .number()
-      .typeError(' الرجاء إدخال أرقام')
+      .typeError('  الرجاء إدخال أرقام فقط')
       .required('الرجاء إدخال رقم الهاتف'),
   });
   return (

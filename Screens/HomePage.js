@@ -103,7 +103,12 @@ const HomePage = () => {
       <ScrollView>
         <Title
           text="الأكثر شعبية"
-          titleStyle={{fontSize: 17, color: 'black', marginVertical: 10}}
+          titleStyle={{
+            fontSize: 17,
+            color: 'black',
+            marginVertical: 10,
+            marginTop: 20,
+          }}
         />
         <View>
           <ScrollView horizontal>
@@ -123,7 +128,12 @@ const HomePage = () => {
         </View>
         <Title
           text="أضيف مؤخرا "
-          titleStyle={{fontSize: 17, color: 'black', marginVertical: 10}}
+          titleStyle={{
+            fontSize: 17,
+            color: 'black',
+            marginVertical: 10,
+            marginTop: 20,
+          }}
         />
         <ScrollView>
           <View>
