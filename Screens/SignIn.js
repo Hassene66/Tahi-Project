@@ -8,6 +8,7 @@ import Background from '../Components/Background';
 import Title from '../Components/Title';
 import PhoneInput from '../Components/PhoneInput';
 import * as yup from 'yup';
+import Form from '../Components/AppForm';
 
 const SignIn = ({navigation}) => {
   const data = [
@@ -21,32 +22,36 @@ const SignIn = ({navigation}) => {
     },
   ];
   const schema = yup.object().shape({
-    name: yup.string().required('الرجاء إدخال الإسم'),
-    surname: yup.string().required('الرجاء إدخال اللقب'),
     phoneNumber: yup
       .number()
-      .typeError(' إدخال الرجاء أرقام')
+      .typeError(' الرجاء إدخال أرقام')
       .required('الرجاء إدخال رقم الهاتف'),
-    country: yup.object().required('الرجاء إدخال المدينة').nullable(),
-    region: yup.object().required('الرجاء إدخال المنطقة').nullable(),
   });
   return (
     <Background>
       <Logo marginTp={100} />
       <Title text="تسجيل الدخول" titleStyle={{marginBottom: 20}} />
-      <RadioButton
-        initial={1}
-        modifiedVersion={true}
-        data={data}
-        onChangeValue={() => console.log('Changed')}
-      />
-      <PhoneInput />
-      <View style={styles.btnContainer}>
-        <ConfirmationButton
-          onPress={() => navigation.navigate('SignInNextStep')}
-          label="التالي"
+      <Form
+        initialValues={{
+          userType: data[0],
+          phoneNumber: '',
+        }}
+        onSubmit={values => console.log(values)}
+        validationSchema={schema}>
+        <PhoneInput name="phoneNumber" show={false} />
+        <RadioButton
+          initial={1}
+          modifiedVersion={true}
+          data={data}
+          name="userType"
         />
-      </View>
+        <View style={styles.btnContainer}>
+          <ConfirmationButton
+            onPress={() => navigation.navigate('SignInNextStep')}
+            label="التالي"
+          />
+        </View>
+      </Form>
     </Background>
   );
 };

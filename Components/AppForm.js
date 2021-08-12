@@ -3,11 +3,12 @@ import {Formik} from 'formik';
 const AppForm = ({initialValues, onSubmit, validationSchema, children}) => {
   return (
     <Formik
-      validateOnBlur={false}
       validateOnChange={false}
+      isInitialValid={validationSchema.isValidSync(initialValues)}
       initialValues={initialValues}
       onSubmit={onSubmit}
-      validationSchema={validationSchema}>
+      validationSchema={validationSchema}
+      enableReinitialize>
       {() => <>{children}</>}
     </Formik>
   );
