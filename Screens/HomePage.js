@@ -9,6 +9,7 @@ import uuid from 'react-native-uuid';
 const HomePage = () => {
   const MostPopular = [
     {
+      id: 1,
       name: 'علي عبد الله',
       place: 'مكه المكرمة',
       location: 'منطقة باب المنارة',
@@ -23,6 +24,7 @@ const HomePage = () => {
       liked: false,
     },
     {
+      id: 2,
       name: 'مروان أيّوب',
       place: 'تونس',
       location: 'المهدية',
@@ -84,8 +86,18 @@ const HomePage = () => {
       }),
     );
   };
+  const setIsLikedMostPopular = id => {
+    setMostPopular(() =>
+      mostPopular.map(el => {
+        if (el.id === id) {
+          return {...el, liked: !el.liked};
+        }
+        return el;
+      }),
+    );
+  };
   return (
-    <Background>
+    <Background isInverted>
       <LogoV2 />
       <Title text="الرئيسية" />
       <ScrollView>
@@ -101,6 +113,7 @@ const HomePage = () => {
                   data={item}
                   isRecent={false}
                   isLiked={item.liked}
+                  setLiked={setIsLikedMostPopular}
                   withBorder
                 />
                 <ListingItemSeperator vertical />
