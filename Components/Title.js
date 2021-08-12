@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 
 const Title = ({text, titleStyle = {}}) => {
   return <Text style={[styles.text, {...titleStyle}]}>{text}</Text>;
@@ -12,6 +12,5 @@ const styles = StyleSheet.create({
     fontFamily: 'Cairo-Bold',
     fontSize: 25,
     color: '#FF6B21',
-    marginTop: 20,
   },
 });

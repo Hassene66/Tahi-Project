@@ -6,11 +6,16 @@ const ConfirmationButton = ({
   label = 'لوريم ايبسوم ',
   onPress = () => null,
 }) => {
-  const {isValid, submitForm, validateForm, values} = useFormikContext();
+  const {isValid, submitForm, validateForm, errors} = useFormikContext();
   return (
     <TouchableOpacity
       onPress={() => {
-        submitForm(), validateForm(), isValid && onPress();
+        submitForm();
+        validateForm();
+        console.log(errors);
+        setTimeout(() => {
+          if (Object.keys(errors).length === 0 && isValid) onPress();
+        }, 150);
       }}
       style={{
         justifyContent: 'flex-end',
