@@ -12,7 +12,6 @@ const ConfirmationButton = ({
       onPress={() => {
         submitForm();
         validateForm();
-        console.log(errors);
         setTimeout(() => {
           if (Object.keys(errors).length === 0 && isValid) onPress();
         }, 150);
