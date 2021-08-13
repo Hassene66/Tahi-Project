@@ -3,10 +3,10 @@ import {I18nManager, LogBox, View, Text} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Subscribe from './Screens/Subscribe';
-import SignInNextStep from './Screens/SignInNextStep';
-import SignIn from './Screens/SignIn';
-import HomePage from './Screens/HomePage';
+import Subscribe from './Screens/SubscribeScreen';
+import SignInNextStep from './Screens/SignInNextStepScreen';
+import SignIn from './Screens/SignInScreen';
+import HomePage from './Screens/HomePageScreen';
 import Card from './Components/Card';
 import LogoV2 from './Components/LogoV2';
 import Picker from './Components/Picker';
@@ -17,7 +17,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Background from './Components/Background';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import LinearGradient from 'react-native-linear-gradient';
-import Search from './Screens/Search';
+import Search from './Screens/SearchScreen';
 import CustomTabBar from './Components/CustomTabBar';
 
 const App = () => {
@@ -30,7 +30,7 @@ const App = () => {
   }, []);
   return (
     <NavigationContainer>
-      <TabNavigator />
+      <StackNavigator />
     </NavigationContainer>
   );
 };
@@ -38,7 +38,7 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator
     screenOptions={{headerShown: false}}
-    initialRouteName="HomePage">
+    initialRouteName="Search">
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignInNextStep" component={SignInNextStep} />
     <Stack.Screen name="Subscribe" component={Subscribe} />
