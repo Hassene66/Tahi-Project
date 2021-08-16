@@ -22,11 +22,10 @@ const PreviousPageNavigation = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    alignItems: 'flex-start',
   },
   icon: {
-    height: 40,
-    width: 40,
+    height: 50,
+    width: 50,
     borderRadius: 100,
     backgroundColor: 'white',
     justifyContent: 'center',

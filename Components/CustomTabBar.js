@@ -35,7 +35,7 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
       }}>
       <LinearGradient
         colors={['#FF6C25', '#FF832C', '#FF8F2F', '#FF9A32', '#FFA034']}
-        start={{x: 0.2, y: 0}}
+        start={{x: 0, y: 0}}
         end={{x: 1, y: 0}}>
         <View style={styles.tabBar}>
           {state.routes.map((route, index) => {

@@ -19,6 +19,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import LinearGradient from 'react-native-linear-gradient';
 import Search from './Screens/SearchScreen';
 import CustomTabBar from './Components/CustomTabBar';
+import ChefProfileScreen from './Screens/ChefProfileScreen';
 
 const App = () => {
   I18nManager.forceRTL(true);
@@ -38,14 +39,15 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator
     screenOptions={{headerShown: false}}
-    initialRouteName="Search">
+    initialRouteName="ChefProfile">
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignInNextStep" component={SignInNextStep} />
     <Stack.Screen name="Subscribe" component={Subscribe} />
-    <Stack.Screen name="HomePage" component={HomePage} />
+    <Stack.Screen name="HomePage" component={TabNavigator} />
     <Stack.Screen name="FavouriteItemScreen" component={FavouriteItemScreen} />
     <Stack.Screen name="Search" component={Search} />
     <Stack.Screen name="CustomTabBar" component={CustomTabBar} />
+    <Stack.Screen name="ChefProfile" component={ChefProfileScreen} />
   </Stack.Navigator>
 );
 

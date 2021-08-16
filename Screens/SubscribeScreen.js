@@ -83,8 +83,6 @@ const Subscribe = () => {
   );
 };
 
-export default Subscribe;
-
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'Cairo-SemiBold',
@@ -94,3 +92,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
+
+export default Subscribe;
