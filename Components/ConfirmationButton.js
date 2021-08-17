@@ -2,12 +2,19 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useFormikContext} from 'formik';
-const ConfirmationButton = ({label = 'لوريم ايبسوم '}) => {
-  const {submitForm, validateForm} = useFormikContext();
+const ConfirmationButton = ({
+  label = 'لوريم ايبسوم ',
+  onPress = () => null,
+}) => {
+  const {isValid, submitForm, validateForm, errors} = useFormikContext();
   return (
     <TouchableOpacity
       onPress={() => {
-        submitForm(), validateForm();
+        submitForm();
+        validateForm();
+        setTimeout(() => {
+          if (Object.keys(errors).length === 0 && isValid) onPress();
+        }, 150);
       }}
       style={{
         justifyContent: 'flex-end',

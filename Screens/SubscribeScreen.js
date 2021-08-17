@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import Background from '../Components/Background';
 import ConfirmationButton from '../Components/ConfirmationButton';
@@ -37,7 +37,7 @@ const Subscribe = () => {
     surname: yup.string().required('الرجاء إدخال اللقب'),
     phoneNumber: yup
       .number()
-      .typeError(' إدخال الرجاء أرقام')
+      .typeError(' الرجاء إدخال أرقام')
       .required('الرجاء إدخال رقم الهاتف'),
     country: yup.object().required('الرجاء إدخال المدينة').nullable(),
     region: yup.object().required('الرجاء إدخال المنطقة').nullable(),
@@ -51,6 +51,8 @@ const Subscribe = () => {
         <Text style={styles.text}>نوع المستخدم</Text>
         <Form
           initialValues={{
+            userType: data1[0],
+            userGender: undefined,
             name: '',
             surname: '',
             phoneNumber: '',
@@ -81,8 +83,6 @@ const Subscribe = () => {
   );
 };
 
-export default Subscribe;
-
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'Cairo-SemiBold',
@@ -92,3 +92,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
+
+export default Subscribe;

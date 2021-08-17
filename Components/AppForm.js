@@ -1,10 +1,10 @@
 import React from 'react';
-import {Formik} from 'formik';
+import {Formik, useFormikContext} from 'formik';
 const AppForm = ({initialValues, onSubmit, validationSchema, children}) => {
   return (
     <Formik
-      validateOnBlur={false}
       validateOnChange={false}
+      isInitialValid={validationSchema.isValidSync(initialValues)}
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}>

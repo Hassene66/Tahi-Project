@@ -5,11 +5,7 @@ import ItemRadioBtn from './ItemRadioBtn';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useFormikContext} from 'formik';
 import ErrorMessage from './ErrorMessage';
-const Picker = ({
-  placeholder = 'لوريم ايبسوم ',
-  getSelectedItem = item => item,
-  name,
-}) => {
+const Picker = ({placeholder = 'لوريم ايبسوم ', name}) => {
   const list = [
     {id: 1, label: 'الطائف'},
     {id: 2, label: 'الدمام'},
@@ -31,7 +27,6 @@ const Picker = ({
     useFormikContext();
   const onSelectItem = item => {
     setSelectedItem(item);
-    getSelectedItem(item);
     setTimeout(() => {
       setIsVisible(false);
     }, 170);

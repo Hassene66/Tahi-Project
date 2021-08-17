@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
 import Background from '../Components/Background';
@@ -7,33 +7,59 @@ import Logo from '../Components/Logo';
 import OtpInput from '../Components/OtpInput';
 import PreviousPageNavigation from '../Components/PreviousPageNavigation';
 import {useNavigation} from '@react-navigation/native';
-
+import Form from '../Components/AppForm';
+import * as yup from 'yup';
 const SignInNextStep = ({phoneNum = 92221321321}) => {
   const navigation = useNavigation();
+  const schema = yup.object().shape({
+    otpInput: yup
+      .number()
+      .required('الرجاء إدخال الكود')
+      .typeError('الرجاء إدخال أرقام فقط')
+      .test(
+        '',
+        'الرجاء إدخال كل الأرقام المطلوبة',
+        code => String(code).length === 4,
+      )
+      .test('', 'الرجاء إدخال أرقام فقط', code => {
+        console.log('test : ' + code);
+        return code !== ',';
+      }),
+  });
+
   return (
     <>
       <Background>
         <PreviousPageNavigation />
         <Logo marginTp={20} />
         <Text style={styles.text}>التحقق من رقم الجوال</Text>
-        <View style={styles.textContainer}>
-          <Text style={styles.text2}>
-            تم إرسال كود على رقم هاتفك
-            <Text style={styles.phoneNumber}> {phoneNum}</Text>
-          </Text>
-        </View>
-        <OtpInput />
-        <View style={styles.resendTextContainer}>
-          <Text onPress={() => console.log('resend')} style={styles.resendText}>
-            إعادة إرسال الرّمز
-          </Text>
-        </View>
-        <View style={styles.btn}>
-          <ConfirmationButton
-            label="تسجيل الدخول"
-            onPress={() => navigation.navigate('Subscribe')}
-          />
-        </View>
+        <Form
+          initialValues={{
+            otpInput: '',
+          }}
+          onSubmit={values => console.log(values)}
+          validationSchema={schema}>
+          <View style={styles.textContainer}>
+            <Text style={styles.text2}>
+              تم إرسال كود على رقم هاتفك
+              <Text style={styles.phoneNumber}> {phoneNum}</Text>
+            </Text>
+          </View>
+          <OtpInput name="otpInput" />
+          <View style={styles.resendTextContainer}>
+            <Text
+              onPress={() => console.log('resend')}
+              style={styles.resendText}>
+              إعادة إرسال الرّمز
+            </Text>
+          </View>
+          <View style={styles.btn}>
+            <ConfirmationButton
+              label="تسجيل الدخول"
+              onPress={() => navigation.navigate('Subscribe')}
+            />
+          </View>
+        </Form>
       </Background>
     </>
   );

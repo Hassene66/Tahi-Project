@@ -22,7 +22,6 @@ const PreviousPageNavigation = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    alignItems: 'flex-start',
   },
   icon: {
     height: 50,

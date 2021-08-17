@@ -2,28 +2,35 @@ import React, {useState} from 'react';
 import {View, Platform, StyleSheet} from 'react-native';
 
 import OTPInputView from '@twotalltotems/react-native-otp-input';
-
-const OtpInput = () => {
-  const [code, setCode] = useState(0);
+import ErrorMessage from './ErrorMessage';
+import {useFormikContext} from 'formik';
+const OtpInput = ({name}) => {
+  const {setFieldValue, validateField, errors} = useFormikContext();
   return (
-    <View style={styles.container}>
-      <OTPInputView
-        pinCount={4}
-        style={{
-          height: 100,
-          width: '95%',
-        }}
-        codeInputFieldStyle={styles.underlineStyleBase}
-        codeInputHighlightStyle={styles.underlineStyleHighLighted}
-        onCodeFilled={c => {
-          setCode(c);
-          console.log(code);
-        }}
-        placeholderCharacter="&#8212;"
-        placeholderTextColor="#bfbfbf"
-        autoFocusOnLoad={false}
-      />
-    </View>
+    <>
+      <View style={styles.container}>
+        <OTPInputView
+          pinCount={4}
+          style={{
+            height: 100,
+            width: '95%',
+          }}
+          codeInputFieldStyle={styles.underlineStyleBase}
+          codeInputHighlightStyle={styles.underlineStyleHighLighted}
+          onCodeChanged={code => {
+            console.log('onCodeChanged : ' + code);
+            setFieldValue(name, code);
+          }}
+          onCodeFilled={code => {
+            setTimeout(() => validateField(name), 150);
+          }}
+          placeholderCharacter="&#8212;"
+          placeholderTextColor="#bfbfbf"
+          autoFocusOnLoad={false}
+        />
+      </View>
+      <ErrorMessage error={errors[name]} />
+    </>
   );
 };
 const styles = StyleSheet.create({

@@ -79,34 +79,34 @@ const FavouriteItemScreen = () => {
   ];
   return (
     <Background>
-      <View style={{flexDirection: 'row', paddingBottom:35}}>
+      <View style={{flexDirection: 'row', paddingBottom: 35}}>
         <View style={{justifyContent: 'center'}}>
           <PreviousPageNavigation />
         </View>
         <View style={{justifyContent: 'center'}}>
           <Title
             text="قائمة المفضلة"
-            titleStyle={{marginTop: 0, paddingHorizontal: 50}}
+            titleStyle={{marginTop: 20, paddingHorizontal: 50}}
           />
         </View>
       </View>
-        <SafeAreaView>
-          <FlatList
-            data={MostRecent}
-            keyExtractor={item => uuid.v4()}
-            renderItem={({item}) => (
-              <React.Fragment>
-                <Card
-                  data={item}
-                  isRecent
-                  isLiked={item.liked}
-                  setLiked={setIsLiked}
-                />
-                <ListingItemSeperator vertical={false} />
-              </React.Fragment>
-            )}
-          />
-        </SafeAreaView>
+      <SafeAreaView>
+        <FlatList
+          data={MostRecent}
+          keyExtractor={item => uuid.v4()}
+          renderItem={({item}) => (
+            <React.Fragment>
+              <Card
+                data={item}
+                isRecent
+                isLiked={item.liked}
+                setLiked={setIsLiked}
+              />
+              <ListingItemSeperator vertical={false} />
+            </React.Fragment>
+          )}
+        />
+      </SafeAreaView>
     </Background>
   );
 };
