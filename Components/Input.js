@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {TextInput, HelperText} from 'react-native-paper';
+import {TextInput} from 'react-native-paper';
 import * as yup from 'yup';
 import ErrorMessage from './ErrorMessage';
 import {useFormikContext} from 'formik';
@@ -28,7 +28,6 @@ const Input = ({
           textAlign="right"
           underlineColor="transparent"
           onChangeText={handleChange(name)}
-          onBlur={() => setFieldTouched(name)}
           theme={{
             fonts: {
               regular: {
