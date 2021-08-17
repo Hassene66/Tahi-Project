@@ -6,6 +6,7 @@ import Title from '../Components/Title';
 import Card from '../Components/Card';
 import ListingItemSeperator from '../Components/ListingItemSeperator';
 import uuid from 'react-native-uuid';
+import Header from '../Components/Header';
 
 const FavouriteItemScreen = () => {
   const [mostRecent, setMostRecent] = useState(MostRecent);
@@ -79,17 +80,7 @@ const FavouriteItemScreen = () => {
   ];
   return (
     <Background>
-      <View style={{flexDirection: 'row', paddingBottom: 35}}>
-        <View style={{justifyContent: 'center'}}>
-          <PreviousPageNavigation />
-        </View>
-        <View style={{justifyContent: 'center'}}>
-          <Title
-            text="قائمة المفضلة"
-            titleStyle={{marginTop: 20, paddingHorizontal: 50}}
-          />
-        </View>
-      </View>
+      <Header title="قائمة المفضلة" />
       <SafeAreaView>
         <FlatList
           data={MostRecent}

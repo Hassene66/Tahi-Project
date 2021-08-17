@@ -1,30 +1,38 @@
 import React, {useState} from 'react';
 import Modal from 'react-native-modal';
-import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
+import uuid from 'react-native-uuid';
+import LinearGradient from 'react-native-linear-gradient';
+import {filter} from 'smart-array-filter/src';
+import {
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import ItemRadioBtn from './ItemRadioBtn';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useFormikContext} from 'formik';
 import ErrorMessage from './ErrorMessage';
-const Picker = ({placeholder = 'لوريم ايبسوم ', name}) => {
-  const list = [
-    {id: 1, label: 'الطائف'},
-    {id: 2, label: 'الدمام'},
-    {id: 3, label: 'بريدة'},
-    {id: 4, label: 'مدينة الخبر'},
-    {id: 5, label: 'تبوك'},
-    {id: 6, label: 'جدة'},
-    {id: 7, label: 'المدينة المنورة'},
-    {id: 8, label: 'الأحساء'},
-    {id: 9, label: 'الطائف'},
-    {id: 10, label: 'الدمام'},
-    {id: 11, label: 'بريدة'},
-    {id: 12, label: 'مدينة الخبر'},
-    {id: 13, label: 'تبوك'},
-  ];
+import CheckBox from 'react-native-check-box';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Title from './Title';
+const Picker = ({
+  placeholder = 'لوريم ايبسوم ',
+  name,
+  withTitle = true,
+  list = [],
+  chevronDirection = 'down',
+  isRadio = true,
+}) => {
+  const {setFieldValue, errors} = useFormikContext();
   const [isVisible, setIsVisible] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [data, setData] = useState(list);
   const [selectedItem, setSelectedItem] = useState('');
-  const {handleChange, setFieldValue, errors, touched, values} =
-    useFormikContext();
   const onSelectItem = item => {
     setSelectedItem(item);
     setTimeout(() => {
@@ -32,17 +40,75 @@ const Picker = ({placeholder = 'لوريم ايبسوم ', name}) => {
     }, 170);
   };
 
+  const handleCheck = item => {
+    return data.map(el => {
+      if (el.id === item.id) return {...el, checked: !el.checked};
+      return el;
+    });
+  };
+
+  const filteredData = filter(data, {
+    keywords: `label:${searchTerm}`,
+    caseSensitive: true,
+  });
+  const getSelectedItems = () => data.filter(el => el.checked);
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setIsVisible(true)}>
         <View style={[styles.container, errors[name] && styles.error]}>
-          <Text style={styles.title}>{placeholder}</Text>
-          {selectedItem ? (
-            <Text style={styles.subTitle}>{selectedItem.label}</Text>
-          ) : (
-            <Text style={styles.subTitle}>{placeholder}</Text>
-          )}
-          <Icon style={styles.icon} name="chevron-down" size={23} />
+          {isRadio
+            ? [
+                <Text key={uuid.v4()} style={styles.title}>
+                  {placeholder}
+                </Text>,
+                selectedItem ? (
+                  <Text key={uuid.v4()} style={styles.subTitle}>
+                    {selectedItem.label}
+                  </Text>
+                ) : (
+                  <Text key={uuid.v4()} style={styles.subTitle}>
+                    {placeholder}
+                  </Text>
+                ),
+              ]
+            : [
+                getSelectedItems().length !== 0 && (
+                  <Text key={uuid.v4()} style={styles.title}>
+                    {placeholder}
+                  </Text>
+                ),
+                getSelectedItems().length === 0 ? (
+                  <Text key={uuid.v4()} style={styles.subTitle}>
+                    {placeholder}
+                  </Text>
+                ) : (
+                  <View
+                    key={uuid.v4()}
+                    style={{
+                      alignItems: 'flex-end',
+                      flexDirection: 'row',
+                      width: '85%',
+                    }}>
+                    <ScrollView
+                      horizontal
+                      showsHorizontalScrollIndicator={false}>
+                      {getSelectedItems().map((el, key) => (
+                        <Text
+                          style={[styles.subTitle, {alignItems: 'flex-end'}]}
+                          key={uuid.v4()}>
+                          {el.label + ' ,'}
+                        </Text>
+                      ))}
+                    </ScrollView>
+                  </View>
+                ),
+              ]}
+
+          <MaterialCommunityIcons
+            style={styles.icon}
+            name={`chevron-${chevronDirection}`}
+            size={23}
+          />
         </View>
       </TouchableWithoutFeedback>
       <ErrorMessage error={errors[name]} />
@@ -60,24 +126,120 @@ const Picker = ({placeholder = 'لوريم ايبسوم ', name}) => {
           onSwipeComplete={() => setIsVisible(false)}
           swipeDirection="down"
           onBackButtonPress={() => setIsVisible(false)}>
-          <View
-            style={{
-              backgroundColor: 'white',
-              height: '60%',
-              borderTopRightRadius: 20,
-              borderTopLeftRadius: 20,
-            }}>
-            <ItemRadioBtn
-              name={name}
-              title={placeholder}
-              data={list}
-              initial={-1}
-              onPress={item => {
-                setFieldValue(name, item);
-                onSelectItem(item);
-              }}
-            />
-          </View>
+          {isRadio ? (
+            <View style={styles.list}>
+              <ItemRadioBtn
+                name={name}
+                title={placeholder}
+                data={list}
+                initial={-1}
+                onPress={item => {
+                  setFieldValue(name, item);
+                  onSelectItem(item);
+                }}
+              />
+            </View>
+          ) : (
+            <View style={styles.list}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginTop: 25,
+                }}>
+                <Title text="إختر  الخدمات" titleStyle={styles.titleStyle} />
+                <TouchableOpacity onPress={() => setData(list)}>
+                  <View
+                    style={{
+                      height: 55,
+                      borderRadius: 10,
+                      justifyContent: 'center',
+                      alignSelf: 'center',
+                      paddingHorizontal: 15,
+                      marginRight: 10,
+                      borderColor: '#707070',
+                      borderWidth: 2,
+                    }}>
+                    <Text style={[styles.btn, {color: 'black'}]}>
+                      إعادة ضبط
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setIsVisible(false)}>
+                  <View
+                    style={{
+                      height: 55,
+                      justifyContent: 'center',
+                      alignSelf: 'center',
+                      marginRight: 10,
+                    }}>
+                    <LinearGradient
+                      colors={['#FF6921', '#FFD051']}
+                      start={{x: 0, y: 0}}
+                      end={{x: 1, y: 0}}
+                      style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        paddingHorizontal: 15,
+                        borderRadius: 10,
+                      }}>
+                      <Text style={[styles.btn, {color: 'white'}]}>تفعيل</Text>
+                    </LinearGradient>
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <View
+                style={{
+                  height: 65,
+                  borderRadius: 10,
+                  borderColor: '#CCCCCC',
+                  borderWidth: 2,
+                  marginVertical: 15,
+                  justifyContent: 'center',
+                }}>
+                <TextInput
+                  placeholder="اسم الخدمات"
+                  color="#999999"
+                  placeholderTextColor="#999999"
+                  style={styles.textInput}
+                  onChangeText={text => setSearchTerm(text)}
+                />
+              </View>
+
+              <FlatList
+                data={filteredData}
+                keyExtractor={() => uuid.v4()}
+                renderItem={({item}) => (
+                  <CheckBox
+                    style={{flex: 1, paddingVertical: 10}}
+                    rightText={item.label}
+                    rightTextStyle={{
+                      fontFamily: 'Cairo-SemiBold',
+                      fontSize: 17,
+                    }}
+                    checkedImage={
+                      <MaterialIcons
+                        name="check-circle"
+                        size={25}
+                        color="#FF6B21"
+                      />
+                    }
+                    unCheckedImage={
+                      <MaterialIcons
+                        name="radio-button-unchecked"
+                        size={25}
+                        color="#707070"
+                      />
+                    }
+                    onClick={() => {
+                      setData(() => handleCheck(item));
+                      setFieldValue(name, handleCheck(item));
+                    }}
+                    isChecked={item.checked}
+                  />
+                )}
+              />
+            </View>
+          )}
         </Modal>
       </View>
     </>
@@ -126,5 +288,29 @@ const styles = StyleSheet.create({
   error: {
     borderWidth: 2,
     borderColor: 'red',
+  },
+  list: {
+    paddingHorizontal: 15,
+    backgroundColor: 'white',
+    height: '70%',
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    overflow: 'hidden',
+  },
+  titleStyle: {
+    marginVertical: 20,
+    fontSize: 18,
+    marginLeft: 25,
+    flex: 1,
+  },
+  btn: {
+    fontFamily: 'Cairo-Bold',
+    fontSize: 16,
+  },
+  textInput: {
+    fontFamily: 'Cairo-Regular',
+    textAlign: 'right',
+    fontSize: 17,
+    paddingLeft: 20,
   },
 });

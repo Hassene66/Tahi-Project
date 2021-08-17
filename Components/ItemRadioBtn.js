@@ -7,16 +7,20 @@ const ItemRadioBtn = ({title = '', data, onPress, initial = 1}) => {
   return (
     <>
       <Title text={title} titleStyle={styles.titleStyle} />
-      <ScrollView>
-        <RadioButtonRN
-          data={data}
-          textStyle={styles.textStyle}
-          box={false}
-          initial={initial}
-          selectedBtn={item => onPress(item)}
-          icon={<Icon name="radio-button-checked" size={26} color="#FF6B21" />}
-        />
-      </ScrollView>
+      <View>
+        <ScrollView>
+          <RadioButtonRN
+            data={data}
+            textStyle={styles.textStyle}
+            box={false}
+            initial={initial}
+            selectedBtn={item => onPress(item)}
+            icon={
+              <Icon name="radio-button-checked" size={26} color="#FF6B21" />
+            }
+          />
+        </ScrollView>
+      </View>
     </>
   );
 };

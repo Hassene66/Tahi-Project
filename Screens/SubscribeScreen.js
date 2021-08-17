@@ -12,6 +12,22 @@ import Picker from '../Components/Picker';
 import PhoneInput from '../Components/PhoneInput';
 import Form from '../Components/AppForm';
 const Subscribe = () => {
+  const list = [
+    {id: 1, label: 'الطائف'},
+    {id: 2, label: 'الدمام'},
+    {id: 3, label: 'بريدة'},
+    {id: 4, label: 'مدينة الخبر'},
+    {id: 5, label: 'تبوك'},
+    {id: 6, label: 'جدة'},
+    {id: 7, label: 'المدينة المنورة'},
+    {id: 8, label: 'الأحساء'},
+    {id: 9, label: 'الطائف'},
+    {id: 10, label: 'الدمام'},
+    {id: 11, label: 'بريدة'},
+    {id: 12, label: 'مدينة الخبر'},
+    {id: 13, label: 'تبوك'},
+  ];
+
   const data1 = [
     {
       id: 1,
@@ -70,8 +86,8 @@ const Subscribe = () => {
           <Input name="name" label="الإسم" />
           <Input name="surname" label="اللقب" />
           <PhoneInput name="phoneNumber" show={false} />
-          <Picker placeholder="المدينة" name="country" />
-          <Picker placeholder="المنطقة" name="region" />
+          <Picker placeholder="المدينة" name="country" list={list} />
+          <Picker placeholder="المنطقة" name="region" list={list} />
           <Text style={[styles.text, {marginTop: 10}]}>
             الجنس<Text style={styles.lightText}> ( اختياري )</Text>
           </Text>
