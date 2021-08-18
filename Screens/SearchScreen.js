@@ -188,7 +188,6 @@ const SearchScreen = () => {
             containerStyle={{fontFamily: 'Cairo-Bold'}}
           />
           <Title text="النتيجة" titleStyle={{marginVertical: 20}} />
-          <View style={{backgroundColor: 'red', flex: 1}}></View>
         </ScrollView>
       </Form>
     </Background>

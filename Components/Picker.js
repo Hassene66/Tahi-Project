@@ -47,7 +47,7 @@ const Picker = ({
     });
   };
 
-  const filteredData = filter(data, {
+  let filteredData = filter(data, {
     keywords: `label:${searchTerm}`,
     caseSensitive: false,
   });
@@ -143,8 +143,14 @@ const Picker = ({
                   flexDirection: 'row',
                   marginTop: 25,
                 }}>
-                <Title text="إختر  الخدمات" titleStyle={styles.titleStyle} />
-                <TouchableOpacity onPress={() => setData(list)}>
+                <Title
+                  text={isServices ? 'إختر  الخدمات' : 'إختر الاطباق'}
+                  titleStyle={styles.titleStyle}
+                />
+                <TouchableOpacity
+                  onPress={() => {
+                    setSearchTerm(''), setData(list);
+                  }}>
                   <View
                     style={{
                       height: 55,
@@ -167,7 +173,6 @@ const Picker = ({
                       height: 55,
                       justifyContent: 'center',
                       alignSelf: 'center',
-                      marginRight: 10,
                     }}>
                     <LinearGradient
                       colors={['#FF6921', '#FFD051']}
@@ -178,6 +183,7 @@ const Picker = ({
                         justifyContent: 'center',
                         paddingHorizontal: 15,
                         borderRadius: 10,
+                        paddingHorizontal: 30,
                       }}>
                       <Text style={[styles.btn, {color: 'white'}]}>تفعيل</Text>
                     </LinearGradient>
@@ -194,11 +200,12 @@ const Picker = ({
                   justifyContent: 'center',
                 }}>
                 <TextInput
-                  placeholder="اسم الخدمات"
+                  placeholder={isServices ? 'إسم الخدمات' : 'إسم الطبق'}
                   color="#999999"
                   placeholderTextColor="#999999"
                   style={styles.textInput}
                   onChangeText={text => setSearchTerm(text)}
+                  value={searchTerm}
                 />
               </View>
               {isServices ? (
@@ -306,8 +313,7 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     marginVertical: 20,
-    fontSize: 18,
-    marginLeft: 25,
+    fontSize: 19,
     flex: 1,
   },
   btn: {

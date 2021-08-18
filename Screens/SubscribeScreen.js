@@ -11,7 +11,7 @@ import PreviousPageNavigation from '../Components/PreviousPageNavigation';
 import Picker from '../Components/Picker';
 import PhoneInput from '../Components/PhoneInput';
 import Form from '../Components/AppForm';
-const Subscribe = () => {
+const Subscribe = ({navigation}) => {
   const list = [
     {id: 1, label: 'الطائف'},
     {id: 2, label: 'الدمام'},
@@ -92,7 +92,10 @@ const Subscribe = () => {
             الجنس<Text style={styles.lightText}> ( اختياري )</Text>
           </Text>
           <RadioButton name="userGender" modifiedVersion={true} data={data2} />
-          <ConfirmationButton label="تسجيل" />
+          <ConfirmationButton
+            onPress={() => navigation.navigate('HomePage')}
+            label="تسجيل"
+          />
         </Form>
       </ScrollView>
     </Background>
