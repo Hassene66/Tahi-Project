@@ -27,6 +27,7 @@ const App = () => {
     SplashScreen.hide();
     LogBox.ignoreLogs([
       'isInitialValid has been deprecated and will be removed in future versions of Formik. Please use initialErrors or validateOnMount instead.',
+      'VirtualizedLists should never be nested',
     ]);
   }, []);
   return (
