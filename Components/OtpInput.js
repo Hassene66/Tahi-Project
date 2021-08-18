@@ -5,7 +5,8 @@ import OTPInputView from '@twotalltotems/react-native-otp-input';
 import ErrorMessage from './ErrorMessage';
 import {useFormikContext} from 'formik';
 const OtpInput = ({name}) => {
-  const {setFieldValue, validateField, errors} = useFormikContext();
+  const {setFieldValue, validateField, errors, isValidating} =
+    useFormikContext();
   return (
     <>
       <View style={styles.container}>
@@ -18,11 +19,12 @@ const OtpInput = ({name}) => {
           codeInputFieldStyle={styles.underlineStyleBase}
           codeInputHighlightStyle={styles.underlineStyleHighLighted}
           onCodeChanged={code => {
-            console.log('onCodeChanged : ' + code);
             setFieldValue(name, code);
           }}
           onCodeFilled={code => {
-            setTimeout(() => validateField(name), 150);
+            setTimeout(() => {
+              validateField(name);
+            }, 150);
           }}
           placeholderCharacter="&#8212;"
           placeholderTextColor="#bfbfbf"

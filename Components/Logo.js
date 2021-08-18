@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Image, View} from 'react-native';
 
-const Logo = ({marginTP = 0, WIDTH = 100, HEIGHT = 100}) => {
+const Logo = ({marginTP = 0, WIDTH = 100, HEIGHT = 100, isSmall = false}) => {
   const styles = StyleSheet.create({
     image: {
       width: WIDTH,
@@ -13,7 +13,11 @@ const Logo = ({marginTP = 0, WIDTH = 100, HEIGHT = 100}) => {
   });
   return (
     <View style={[styles.image, {marginTop: marginTP}]}>
-      <Image source={require('../assets/logo/tahi.png')} />
+      {isSmall ? (
+        <Image source={require('../assets/logo/tahiV2.png')} />
+      ) : (
+        <Image source={require('../assets/logo/tahi.png')} />
+      )}
     </View>
   );
 };

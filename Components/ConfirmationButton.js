@@ -6,7 +6,8 @@ const ConfirmationButton = ({
   label = 'لوريم ايبسوم ',
   onPress = () => null,
 }) => {
-  const {isValid, submitForm, validateForm, errors} = useFormikContext();
+  const {isValid, submitForm, validateForm, errors, validate} =
+    useFormikContext();
   return (
     <TouchableOpacity
       onPress={() => {

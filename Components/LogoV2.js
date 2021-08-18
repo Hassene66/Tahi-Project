@@ -15,7 +15,7 @@ const LogoV2 = ({navigation}) => {
           justifyContent: 'flex-start',
           alignItems: 'center',
         }}>
-        <Logo marginTP={0} WIDTH={30} HEIGHT={30} />
+        <Logo marginTP={0} WIDTH={30} HEIGHT={30} isSmall />
       </View>
       <View
         style={{
@@ -38,6 +38,7 @@ const LogoV2 = ({navigation}) => {
           color="#464646"
           bgColor="#EDEBEB"
           marginHorizontal={5}
+          pageName="Search"
         />
 
         <RoundIcon

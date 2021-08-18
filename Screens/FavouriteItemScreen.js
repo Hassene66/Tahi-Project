@@ -83,6 +83,7 @@ const FavouriteItemScreen = () => {
       <Header title="قائمة المفضلة" />
       <SafeAreaView>
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={MostRecent}
           keyExtractor={item => uuid.v4()}
           renderItem={({item}) => (

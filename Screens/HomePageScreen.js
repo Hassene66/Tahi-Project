@@ -6,7 +6,7 @@ import LogoV2 from '../Components/LogoV2';
 import Title from '../Components/Title';
 import ListingItemSeperator from '../Components/ListingItemSeperator';
 import uuid from 'react-native-uuid';
-const HomePage = () => {
+const HomePage = ({navigation}) => {
   const MostPopular = [
     {
       id: 1,
@@ -100,7 +100,7 @@ const HomePage = () => {
     <Background isInverted>
       <LogoV2 />
       <Title text="الرئيسية" />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Title
           text="الأكثر شعبية"
           titleStyle={{
@@ -111,7 +111,7 @@ const HomePage = () => {
           }}
         />
         <View>
-          <ScrollView horizontal>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {mostPopular.map(item => (
               <React.Fragment key={uuid.v4()}>
                 <Card

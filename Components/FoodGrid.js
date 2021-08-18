@@ -19,15 +19,15 @@ const FoodGrid = ({data = [], handleCheck = () => null, setData, name}) => {
       <View
         style={[
           {flex: 1, alignItems: 'flex-start'},
-          index % 2 == 0 ? {marginRight: 8} : {marginLeft: 8},
+          index % 2 == 0 ? {marginRight: 3} : {marginLeft: 3},
         ]}>
         <ImageBackground
           source={url}
           style={{
-            borderRadius: 35,
-            height: Dimensions.get('window').width / 2 - 60,
+            borderRadius: 20,
+            height: Dimensions.get('window').width / 2 - 80,
             overflow: 'hidden',
-            width: Dimensions.get('window').width / 2 - 40,
+            width: Dimensions.get('window').width / 2 - 35,
           }}>
           <CheckBox
             style={{
@@ -91,6 +91,7 @@ const FoodGrid = ({data = [], handleCheck = () => null, setData, name}) => {
       }}>
       <View>
         <FlatList
+          showsVerticalScrollIndicator={false}
           horizontal={false}
           numColumns={2}
           data={data}
