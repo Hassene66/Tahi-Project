@@ -11,7 +11,6 @@ const RoundIcon = ({
   bgColor,
   marginHorizontal,
   pageName = undefined,
-  shadow,
 }) => {
   const navigation = useNavigation();
   return (
