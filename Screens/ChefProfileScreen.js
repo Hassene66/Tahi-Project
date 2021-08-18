@@ -13,15 +13,40 @@ import About from '../Components/About';
 const ChefProfileScreen = () => {
   I18nManager.allowRTL(false);
   const ChefData = {
-    id: 1,
-    name: 'علي عبد الله',
-    place: 'مكه المكرمة',
-    location: 'منطقة باب المنارة',
-    numberOfRequests: 15,
-    rating: '3.2',
-    liked: false,
+    chefInfo: {
+      id: 1,
+      name: 'علي عبد الله',
+      place: 'مكه المكرمة',
+      location: 'منطقة باب المنارة',
+      numberOfRequests: 15,
+      rating: '3.2',
+      liked: false,
+    },
+    platePhotos: [
+      {name: 'إسم الطبق', url: require('../assets/images/photo1.jpg')},
+      {name: 'إسم الطبق', url: require('../assets/images/photo2.jpg')},
+      {name: 'إسم الطبق', url: require('../assets/images/photo3.jpg')},
+      {name: 'إسم الطبق', url: require('../assets/images/photo1.jpg')},
+    ],
+    about: {
+      countryName: 'الرياض',
+      location: 'منطقة الرياض',
+      services: [
+        'خدمات',
+        'خدمات',
+        'خدمات',
+        'خدمات',
+        'خدمات',
+        'خدمات',
+        'خدمات',
+        'خدمات',
+        'خدمات',
+        'خدمات',
+      ],
+      delivryServices: ['طبخ عن بعد', 'الطبخ مع التوصيل', 'الطبخ عند العميل'],
+    },
   };
-  const [chefData, setChefData] = useState(ChefData);
+  const [chefData, setChefData] = useState(ChefData['chefInfo']);
   const setIsLiked = () => {
     setChefData({...chefData, liked: !chefData.liked});
   };
@@ -50,9 +75,20 @@ const ChefProfileScreen = () => {
         }}
         backBehavior="history"
         initialRouteName="FoodPhoto">
-        <Tab.Screen name="FoodPhoto" component={FoodPhotos} />
+        <Tab.Screen
+          name="FoodPhoto"
+          children={() => <FoodPhotos platePhotos={ChefData['platePhotos']} />}
+        />
         <Tab.Screen name="Evaluation" component={Evaluation} />
-        <Tab.Screen name="About" component={About} />
+        <Tab.Screen
+          name="About"
+          children={() => (
+            <About
+              platePhotos={ChefData['platePhotos']}
+              about={ChefData['about']}
+            />
+          )}
+        />
       </Tab.Navigator>
     </Background>
   );

@@ -1,26 +1,8 @@
 import React from 'react';
-import {
-  View,
-  SafeAreaView,
-  Image,
-  Dimensions,
-  FlatList,
-  Text,
-} from 'react-native';
+import {View, SafeAreaView, Image, Dimensions, FlatList} from 'react-native';
 import ListingItemSeperator from './ListingItemSeperator';
 import Title from './Title';
-const FoodPhotos = () => {
-  const arrImages = [
-    {name: 'إسم الطبق', url: require('../assets/images/photo1.jpg')},
-    {name: 'إسم الطبق', url: require('../assets/images/photo2.jpg')},
-    {name: 'إسم الطبق', url: require('../assets/images/photo3.jpg')},
-    {name: 'إسم الطبق', url: require('../assets/images/photo1.jpg')},
-    {name: 'إسم الطبق', url: require('../assets/images/photo2.jpg')},
-    {name: 'إسم الطبق', url: require('../assets/images/photo3.jpg')},
-    {name: 'إسم الطبق', url: require('../assets/images/photo1.jpg')},
-    {name: 'إسم الطبق', url: require('../assets/images/photo2.jpg')},
-    {name: 'إسم الطبق', url: require('../assets/images/photo3.jpg')},
-  ];
+const FoodPhotos = ({platePhotos: arrImages}) => {
   renderImages = ({item: {name, url}, index}) => {
     return (
       <View
@@ -32,7 +14,7 @@ const FoodPhotos = () => {
           source={url}
           style={{
             borderRadius: 35,
-            height: 170,
+            height: Dimensions.get('window').width / 2 - 65,
             width: Dimensions.get('window').width / 2 - 40,
           }}
         />
@@ -51,24 +33,28 @@ const FoodPhotos = () => {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        marginHorizontal: 15,
-        marginTop: 15,
-      }}>
-      <View>
-        <FlatList
-          horizontal={false}
-          numColumns={2}
-          data={arrImages}
-          keyExtractor={(data, id) => id.toString()}
-          renderItem={renderImages}
-          ItemSeparatorComponent={() => (
-            <ListingItemSeperator vertical={false} />
-          )}
-        />
-      </View>
-    </SafeAreaView>
+    <View>
+      <SafeAreaView
+        style={{
+          marginHorizontal: 15,
+          marginTop: 15,
+        }}>
+        <View>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            horizontal={false}
+            numColumns={2}
+            data={arrImages}
+            keyExtractor={(_, id) => id.toString()}
+            renderItem={renderImages}
+            ItemSeparatorComponent={() => (
+              <ListingItemSeperator vertical={false} />
+            )}
+          />
+        </View>
+      </SafeAreaView>
+    </View>
   );
 };
 
