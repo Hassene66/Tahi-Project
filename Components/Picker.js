@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Modal from 'react-native-modal';
 import uuid from 'react-native-uuid';
 import LinearGradient from 'react-native-linear-gradient';
 import {filter} from 'smart-array-filter/src';
 import {
   FlatList,
-  ScrollView,
+  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -20,13 +20,14 @@ import ErrorMessage from './ErrorMessage';
 import CheckBox from 'react-native-check-box';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Title from './Title';
+import FoodGrid from './FoodGrid';
 const Picker = ({
   placeholder = 'لوريم ايبسوم ',
   name,
-  withTitle = true,
   list = [],
   chevronDirection = 'down',
   isRadio = true,
+  isServices = false,
 }) => {
   const {setFieldValue, errors} = useFormikContext();
   const [isVisible, setIsVisible] = useState(false);
@@ -39,17 +40,16 @@ const Picker = ({
       setIsVisible(false);
     }, 170);
   };
-
-  const handleCheck = item => {
+  const handleCheck = id => {
     return data.map(el => {
-      if (el.id === item.id) return {...el, checked: !el.checked};
+      if (el.id === id) return {...el, checked: !el.checked};
       return el;
     });
   };
 
   const filteredData = filter(data, {
     keywords: `label:${searchTerm}`,
-    caseSensitive: true,
+    caseSensitive: false,
   });
   const getSelectedItems = () => data.filter(el => el.checked);
   return (
@@ -82,25 +82,22 @@ const Picker = ({
                     {placeholder}
                   </Text>
                 ) : (
-                  <View
-                    key={uuid.v4()}
-                    style={{
-                      alignItems: 'flex-end',
-                      flexDirection: 'row',
-                      width: '85%',
-                    }}>
-                    <ScrollView
-                      horizontal
-                      showsHorizontalScrollIndicator={false}>
-                      {getSelectedItems().map((el, key) => (
-                        <Text
-                          style={[styles.subTitle, {alignItems: 'flex-end'}]}
-                          key={uuid.v4()}>
-                          {el.label + ' ,'}
-                        </Text>
-                      ))}
-                    </ScrollView>
-                  </View>
+                  [
+                    <View
+                      key={uuid.v4()}
+                      style={{
+                        flexDirection: 'row',
+                        width: '85%',
+                        justifyContent: 'flex-start',
+                      }}>
+                      <Text
+                        numberOfLines={1}
+                        style={[styles.subTitle]}
+                        key={uuid.v4()}>
+                        {getSelectedItems().map(el => el.label + ' ,')}
+                      </Text>
+                    </View>,
+                  ]
                 ),
               ]}
 
@@ -204,40 +201,50 @@ const Picker = ({
                   onChangeText={text => setSearchTerm(text)}
                 />
               </View>
-
-              <FlatList
-                data={filteredData}
-                keyExtractor={() => uuid.v4()}
-                renderItem={({item}) => (
-                  <CheckBox
-                    style={{flex: 1, paddingVertical: 10}}
-                    rightText={item.label}
-                    rightTextStyle={{
-                      fontFamily: 'Cairo-SemiBold',
-                      fontSize: 17,
-                    }}
-                    checkedImage={
-                      <MaterialIcons
-                        name="check-circle"
-                        size={25}
-                        color="#FF6B21"
-                      />
-                    }
-                    unCheckedImage={
-                      <MaterialIcons
-                        name="radio-button-unchecked"
-                        size={25}
-                        color="#707070"
-                      />
-                    }
-                    onClick={() => {
-                      setData(() => handleCheck(item));
-                      setFieldValue(name, handleCheck(item));
-                    }}
-                    isChecked={item.checked}
+              {isServices ? (
+                <FlatList
+                  data={filteredData}
+                  keyExtractor={() => uuid.v4()}
+                  renderItem={({item}) => (
+                    <CheckBox
+                      style={{flex: 1, paddingVertical: 10}}
+                      rightText={item.label}
+                      rightTextStyle={{
+                        fontFamily: 'Cairo-SemiBold',
+                        fontSize: 17,
+                      }}
+                      checkedImage={
+                        <MaterialIcons
+                          name="check-circle"
+                          size={25}
+                          color="#FF6B21"
+                        />
+                      }
+                      unCheckedImage={
+                        <MaterialIcons
+                          name="radio-button-unchecked"
+                          size={25}
+                          color="#707070"
+                        />
+                      }
+                      onClick={() => {
+                        setData(() => handleCheck(item.id));
+                        setFieldValue(name, handleCheck(item.id));
+                      }}
+                      isChecked={item.checked}
+                    />
+                  )}
+                />
+              ) : (
+                <View style={{flex: 1}}>
+                  <FoodGrid
+                    name={name}
+                    data={filteredData}
+                    handleCheck={handleCheck}
+                    setData={setData}
                   />
-                )}
-              />
+                </View>
+              )}
             </View>
           )}
         </Modal>
@@ -292,7 +299,7 @@ const styles = StyleSheet.create({
   list: {
     paddingHorizontal: 15,
     backgroundColor: 'white',
-    height: '70%',
+    height: '80%',
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     overflow: 'hidden',
