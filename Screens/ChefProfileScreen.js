@@ -45,6 +45,42 @@ const ChefProfileScreen = () => {
       ],
       delivryServices: ['طبخ عن بعد', 'الطبخ مع التوصيل', 'الطبخ عند العميل'],
     },
+    evaluation: {
+      overallRating: 4.2,
+      comments: [
+        {
+          name: 'الحسن بن المختار',
+          rating: 4,
+          timeStamp: 'منذ 3 ساعات',
+          content:
+            'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير',
+        },
+        {
+          name: 'محسن علي الهادي',
+          rating: 3,
+          timeStamp: '21-10-2021',
+        },
+        {
+          name: 'مروان أيّوب',
+          rating: 2,
+          timeStamp: '21-10-2021',
+          content:
+            'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير',
+        },
+        {
+          name: 'مروان أيّوب',
+          rating: 2,
+          timeStamp: '21-10-2021',
+          content:
+            'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير',
+        },
+        {
+          name: 'محسن علي الهادي',
+          rating: 3,
+          timeStamp: '21-10-2021',
+        },
+      ],
+    },
   };
   const [chefData, setChefData] = useState(ChefData['chefInfo']);
   const setIsLiked = () => {
@@ -79,7 +115,12 @@ const ChefProfileScreen = () => {
           name="FoodPhoto"
           children={() => <FoodPhotos platePhotos={ChefData['platePhotos']} />}
         />
-        <Tab.Screen name="Evaluation" component={Evaluation} />
+        <Tab.Screen
+          name="Evaluation"
+          children={() => (
+            <Evaluation EvaluationData={ChefData['evaluation']} />
+          )}
+        />
         <Tab.Screen
           name="About"
           children={() => (
