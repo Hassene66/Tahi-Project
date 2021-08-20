@@ -25,6 +25,7 @@ const ChefInfo = ({data: item, isRecent, isLiked, setLiked}) => {
             color="#FABD30"
             bgColor="#FFF8E7"
             size={27}
+            withShadow={false}
           />
         </View>
         <View

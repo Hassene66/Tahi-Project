@@ -11,8 +11,37 @@ const RoundIcon = ({
   bgColor,
   marginHorizontal,
   pageName = undefined,
+  withShadow = true,
 }) => {
   const navigation = useNavigation();
+  const styles = StyleSheet.create({
+    container: {
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      marginHorizontal: 0,
+    },
+    icon: {
+      height: 50,
+      width: 50,
+      borderRadius: 100,
+      backgroundColor: 'white',
+      justifyContent: 'center',
+      alignItems: 'center',
+      elevation: 8,
+      ...Platform.select({
+        ios: {
+          shadowColor: 'red',
+          shadowOffset: {height: 7, width: 7},
+          shadowOpacity: withShadow ? 1 : 0,
+          shadowRadius: 10,
+        },
+        android: {
+          elevation: withShadow ? 10 : 0,
+          shadowColor: 'red',
+        },
+      }),
+    },
+  });
   return (
     <View style={[styles.container, {marginHorizontal: marginHorizontal}]}>
       <TouchableWithoutFeedback
@@ -31,32 +60,4 @@ const RoundIcon = ({
     </View>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    marginHorizontal: 0,
-  },
-  icon: {
-    height: 50,
-    width: 50,
-    borderRadius: 100,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 8,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'red',
-        shadowOffset: {height: 7, width: 7},
-        shadowOpacity: 1,
-        shadowRadius: 10,
-      },
-      android: {
-        elevation: 10,
-        shadowColor: 'red',
-      },
-    }),
-  },
-});
 export default RoundIcon;
