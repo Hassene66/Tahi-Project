@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, FlatList} from 'react-native';
 import Form from '../Components/AppForm';
 import Background from '../Components/Background';
 import Header from '../Components/Header';
@@ -10,21 +10,23 @@ import * as yup from 'yup';
 import ConfirmationButton from '../Components/ConfirmationButton';
 import Title from '../Components/Title';
 import RadioGroup from '../lib/react-native-radio-buttons-group';
+import Card from '../Components/Card';
+import SearchResult from '../Components/SearchResult';
 const SearchScreen = () => {
   const region = [
     {id: 1, label: 'الطائف'},
     {id: 2, label: 'الدمام'},
-    {id: 3, label: 'بريدة'},
+    {id: 3, label: 'تونس'},
     {id: 4, label: 'مدينة الخبر'},
     {id: 5, label: 'تبوك'},
     {id: 6, label: 'جدة'},
     {id: 7, label: 'المدينة المنورة'},
     {id: 8, label: 'الأحساء'},
-    {id: 9, label: 'الطائف'},
+    {id: 9, label: 'مكه المكرمة'},
     {id: 10, label: 'الدمام'},
     {id: 11, label: 'بريدة'},
     {id: 12, label: 'مدينة الخبر'},
-    {id: 13, label: 'تبوك'},
+    {id: 13, label: 'تونس'},
   ];
   const services = [
     {id: 1, label: 'اسم الخدمات', checked: false},
@@ -98,20 +100,6 @@ const SearchScreen = () => {
       checked: false,
     },
   ];
-  const deliveryServices = [
-    {
-      id: 1,
-      label: 'الطبخ عند العميل',
-    },
-    {
-      id: 2,
-      label: 'الطبخ مع التوصيل',
-    },
-    {
-      id: 3,
-      label: 'الطبخ  عن بعد',
-    },
-  ];
   const radioButtonsData = [
     {
       id: uuid.v4(),
@@ -129,38 +117,100 @@ const SearchScreen = () => {
       value: 'الطبخ عند العميل',
     },
   ];
-  const schema = yup.object().shape({
-    region: yup.object().required('الرجاء إدخال المنطقة').nullable(),
-    searchForChef: yup.string().required('الرجاء إدخال الشيف'),
-    services: yup
-      .array()
-      .required('الرجاء إختيار  الخدمات')
-      .test('', 'الرجاء إدخال الخدمات ', arr => {
-        if (typeof arr === 'object') {
-          return arr.filter(el => el.checked === true).length !== 0;
-        } else return false;
-      }),
-    dishes: yup
-      .array()
-      .required('الرجاء إختيار  الاطباق')
-      .test('', 'الرجاء إدخال الاطباق ', arr => {
-        if (typeof arr === 'object') {
-          return arr.filter(el => el.checked === true).length !== 0;
-        } else return false;
-      }),
-  });
+  const searchResults = [
+    {
+      name: 'علي عبد الله',
+      place: 'مكه المكرمة',
+      location: 'منطقة باب المنارة',
+      numberOfRequests: 15,
+      tags: ['المفطح', 'الكبسة', 'المعصوب'],
+      imageUrls: [
+        require('../assets/images/image1.png'),
+        require('../assets/images/image2.png'),
+        require('../assets/images/image3.png'),
+      ],
+      rating: '4.4',
+      liked: true,
+      deliveryService: 'الطبخ عند العميل',
+    },
+    {
+      name: 'حسَان أيّوب',
+      place: 'تونس',
+      location: 'المهدية',
+      numberOfRequests: 7,
+      tags: ['لازانيا', 'مقرونة', 'كسكسي', 'مقرونة'],
+      imageUrls: [
+        require('../assets/images/image1.png'),
+        require('../assets/images/image2.png'),
+        require('../assets/images/image3.png'),
+      ],
+      rating: '3.9',
+      liked: true,
+      deliveryService: 'الطبخ عند العميل',
+    },
+    {
+      name: 'مروان أيّوب',
+      place: 'تونس',
+      location: 'المهدية',
+      numberOfRequests: 7,
+      tags: ['لازانيا', 'مقرونة', 'كسكسي', 'مقرونة'],
+      imageUrls: [
+        require('../assets/images/image1.png'),
+        require('../assets/images/image2.png'),
+        require('../assets/images/image3.png'),
+      ],
+      rating: '3.9',
+      liked: true,
+      deliveryService: 'طبخ عن بعد',
+    },
+    {
+      name: 'مروان أيّوب',
+      place: 'تونس',
+      location: 'المهدية',
+      numberOfRequests: 7,
+      tags: ['لازانيا', 'مقرونة', 'كسكسي', 'مقرونة'],
+      imageUrls: [
+        require('../assets/images/image1.png'),
+        require('../assets/images/image2.png'),
+        require('../assets/images/image3.png'),
+      ],
+      rating: '3.9',
+      liked: true,
+      deliveryService: 'الطبخ مع التوصيل',
+    },
+  ];
+
+  // const schema = yup.object().shape({
+  //   region: yup.object().required('الرجاء إدخال المنطقة').nullable(),
+  //   searchForChef: yup.string().required('الرجاء إدخال الشيف'),
+  //   services: yup
+  //     .array()
+  //     .required('الرجاء إختيار  الخدمات')
+  //     .test('', 'الرجاء إدخال الخدمات ', arr => {
+  //       if (typeof arr === 'object') {
+  //         return arr.filter(el => el.checked === true).length !== 0;
+  //       } else return false;
+  //     }),
+  //   dishes: yup
+  //     .array()
+  //     .required('الرجاء إختيار  الاطباق')
+  //     .test('', 'الرجاء إدخال الاطباق ', arr => {
+  //       if (typeof arr === 'object') {
+  //         return arr.filter(el => el.checked === true).length !== 0;
+  //       } else return false;
+  //     }),
+  // });
   return (
     <Background isInverted>
       <Form
         initialValues={{
-          region: null,
+          region: '',
           searchForChef: '',
           services: [],
           dishes: [],
         }}
-        onSubmit={values => console.log(values)}
-        validationSchema={schema}>
-        <ScrollView>
+        onSubmit={values => console.log(values)}>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <Header title="بحث" />
           <RegionPicker data={region} />
           <Picker
@@ -169,6 +219,7 @@ const SearchScreen = () => {
             list={arrImages}
             chevronDirection="left"
             isRadio={false}
+            isServices={false}
           />
           <Picker
             placeholder="الخدمات"
@@ -188,6 +239,7 @@ const SearchScreen = () => {
             containerStyle={{fontFamily: 'Cairo-Bold'}}
           />
           <Title text="النتيجة" titleStyle={{marginVertical: 20}} />
+          <SearchResult data={searchResults} />
         </ScrollView>
       </Form>
     </Background>

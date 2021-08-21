@@ -12,7 +12,7 @@ const RegionPicker = ({
   placeholder = 'المنطقة',
   data = [],
 }) => {
-  const {setFieldValue, errors} = useFormikContext();
+  const {setFieldValue} = useFormikContext();
 
   const [isVisible, setIsVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
@@ -28,7 +28,7 @@ const RegionPicker = ({
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={() => setIsVisible(true)}>
           <View style={{flex: 0.35}}>
-            <View style={[styles.region, errors[name] && styles.error]}>
+            <View style={[styles.region]}>
               <View style={{flex: 0.3}}>
                 <Icon name="map-pin" size={27} color="white" />
               </View>
@@ -47,8 +47,6 @@ const RegionPicker = ({
         </TouchableWithoutFeedback>
         <Search />
       </View>
-      <ErrorMessage error={errors['searchForChef']} />
-      <ErrorMessage error={errors['region']} />
 
       <View>
         <Modal
@@ -70,7 +68,7 @@ const RegionPicker = ({
               data={data}
               initial={-1}
               onPress={item => {
-                setFieldValue(name, item);
+                setFieldValue(name, item.label);
                 onSelectItem(item);
               }}
             />
@@ -84,10 +82,6 @@ const RegionPicker = ({
 export default RegionPicker;
 
 const styles = StyleSheet.create({
-  error: {
-    borderWidth: 2,
-    borderColor: 'red',
-  },
   container: {alignItems: 'center', flexDirection: 'row'},
   modal: {
     margin: 0,

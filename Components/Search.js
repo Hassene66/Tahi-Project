@@ -4,9 +4,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useFormikContext} from 'formik';
 
 const Search = ({placeholder = 'البحث عن الشيف', name = 'searchForChef'}) => {
-  const {validateField, errors, handleChange} = useFormikContext();
+  const {submitForm, handleChange} = useFormikContext();
   return (
-    <View style={[styles.container, errors[name] && styles.error]}>
+    <View style={[styles.container]}>
       <View style={styles.searchBox}>
         <TextInput
           placeholder={placeholder}
@@ -18,7 +18,7 @@ const Search = ({placeholder = 'البحث عن الشيف', name = 'searchForCh
       </View>
       <TouchableOpacity
         onPress={() => {
-          validateField(name), validateField('region');
+          submitForm();
         }}>
         <View style={styles.icon}>
           <Icon name="search" size={28} color="#464646" />
@@ -57,9 +57,5 @@ const styles = StyleSheet.create({
   searchBox: {
     flex: 3,
     justifyContent: 'center',
-  },
-  error: {
-    borderWidth: 2,
-    borderColor: 'red',
   },
 });

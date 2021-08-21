@@ -4,7 +4,9 @@ const AppForm = ({initialValues, onSubmit, validationSchema, children}) => {
   return (
     <Formik
       validateOnChange={false}
-      isInitialValid={validationSchema.isValidSync(initialValues)}
+      isInitialValid={
+        validationSchema && validationSchema.isValidSync(initialValues)
+      }
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}>

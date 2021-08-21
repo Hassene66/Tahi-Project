@@ -21,6 +21,7 @@ import CheckBox from 'react-native-check-box';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Title from './Title';
 import FoodGrid from './FoodGrid';
+import {ScrollView} from 'react-native-gesture-handler';
 const Picker = ({
   placeholder = 'لوريم ايبسوم ',
   name,
@@ -29,7 +30,7 @@ const Picker = ({
   isRadio = true,
   isServices = false,
 }) => {
-  const {setFieldValue, errors} = useFormikContext();
+  const {setFieldValue, errors, values} = useFormikContext();
   const [isVisible, setIsVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [data, setData] = useState(list);
@@ -46,12 +47,19 @@ const Picker = ({
       return el;
     });
   };
-
   let filteredData = filter(data, {
     keywords: `label:${searchTerm}`,
     caseSensitive: false,
   });
-  const getSelectedItems = () => data.filter(el => el.checked);
+  const getSelectedData = () => data.filter(el => el.checked);
+  const uncheckService = id => {
+    setData(() =>
+      data.map(el => {
+        if (el.id === id) return {...el, checked: false};
+        return el;
+      }),
+    );
+  };
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setIsVisible(true)}>
@@ -72,12 +80,12 @@ const Picker = ({
                 ),
               ]
             : [
-                getSelectedItems().length !== 0 && (
+                getSelectedData().length !== 0 && (
                   <Text key={uuid.v4()} style={styles.title}>
                     {placeholder}
                   </Text>
                 ),
-                getSelectedItems().length === 0 ? (
+                getSelectedData().length === 0 ? (
                   <Text key={uuid.v4()} style={styles.subTitle}>
                     {placeholder}
                   </Text>
@@ -94,7 +102,7 @@ const Picker = ({
                         numberOfLines={1}
                         style={[styles.subTitle]}
                         key={uuid.v4()}>
-                        {getSelectedItems().map(el => el.label + ' ,')}
+                        {getSelectedData().map(el => el.label + ' ,')}
                       </Text>
                     </View>,
                   ]
@@ -150,6 +158,7 @@ const Picker = ({
                 <TouchableOpacity
                   onPress={() => {
                     setSearchTerm(''), setData(list);
+                    values.services = [];
                   }}>
                   <View
                     style={{
@@ -208,49 +217,128 @@ const Picker = ({
                   value={searchTerm}
                 />
               </View>
+
               {isServices ? (
-                <FlatList
-                  data={filteredData}
-                  keyExtractor={() => uuid.v4()}
-                  renderItem={({item}) => (
-                    <CheckBox
-                      style={{flex: 1, paddingVertical: 10}}
-                      rightText={item.label}
-                      rightTextStyle={{
-                        fontFamily: 'Cairo-SemiBold',
-                        fontSize: 17,
-                      }}
-                      checkedImage={
-                        <MaterialIcons
-                          name="check-circle"
-                          size={25}
-                          color="#FF6B21"
-                        />
-                      }
-                      unCheckedImage={
-                        <MaterialIcons
-                          name="radio-button-unchecked"
-                          size={25}
-                          color="#707070"
-                        />
-                      }
-                      onClick={() => {
-                        setData(() => handleCheck(item.id));
-                        setFieldValue(name, handleCheck(item.id));
-                      }}
-                      isChecked={item.checked}
-                    />
-                  )}
-                />
-              ) : (
-                <View style={{flex: 1}}>
-                  <FoodGrid
-                    name={name}
+                <>
+                  <View
+                    key={uuid.v4()}
+                    style={{
+                      flexDirection: 'row',
+                    }}>
+                    {getSelectedData().map(ser => (
+                      <TouchableOpacity
+                        key={uuid.v4()}
+                        onPress={() => uncheckService(ser.id)}>
+                        <View
+                          style={{
+                            backgroundColor: '#EFFCFF',
+                            borderRadius: 15,
+                            paddingHorizontal: 10,
+                            marginRight: 5,
+                            flexDirection: 'row',
+                          }}>
+                          <Title
+                            text="  ✕"
+                            titleStyle={{
+                              color: '#30D2FA',
+                              fontSize: 15,
+                              alignSelf: 'center',
+                            }}
+                          />
+                          <Title
+                            text={ser.label}
+                            titleStyle={{
+                              color: '#30D2FA',
+                              fontSize: 13,
+                              paddingVertical: 5,
+                            }}
+                          />
+                        </View>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                  <FlatList
                     data={filteredData}
-                    handleCheck={handleCheck}
-                    setData={setData}
+                    keyExtractor={() => uuid.v4()}
+                    renderItem={({item}) => (
+                      <CheckBox
+                        style={{flex: 1, paddingVertical: 10}}
+                        rightText={item.label}
+                        rightTextStyle={{
+                          fontFamily: 'Cairo-SemiBold',
+                          fontSize: 17,
+                        }}
+                        checkedImage={
+                          <MaterialIcons
+                            name="check-circle"
+                            size={25}
+                            color="#FF6B21"
+                          />
+                        }
+                        unCheckedImage={
+                          <MaterialIcons
+                            name="radio-button-unchecked"
+                            size={25}
+                            color="#707070"
+                          />
+                        }
+                        onClick={() => {
+                          setData(() => handleCheck(item.id));
+                          setFieldValue(name, handleCheck(item.id));
+                        }}
+                        isChecked={item.checked}
+                      />
+                    )}
                   />
-                </View>
+                </>
+              ) : (
+                <>
+                  <View
+                    key={uuid.v4()}
+                    style={{
+                      flexDirection: 'row',
+                    }}>
+                    {getSelectedData().map(ser => (
+                      <TouchableOpacity
+                        key={uuid.v4()}
+                        onPress={() => uncheckService(ser.id)}>
+                        <View
+                          style={{
+                            backgroundColor: '#EFFCFF',
+                            borderRadius: 15,
+                            paddingHorizontal: 10,
+                            marginRight: 5,
+                            flexDirection: 'row',
+                          }}>
+                          <Title
+                            text="  ✕"
+                            titleStyle={{
+                              color: '#30D2FA',
+                              fontSize: 15,
+                              alignSelf: 'center',
+                            }}
+                          />
+                          <Title
+                            text={ser.label}
+                            titleStyle={{
+                              color: '#30D2FA',
+                              fontSize: 13,
+                              paddingVertical: 5,
+                            }}
+                          />
+                        </View>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                  <View style={{flex: 1}}>
+                    <FoodGrid
+                      name={name}
+                      data={filteredData}
+                      handleCheck={handleCheck}
+                      setData={setData}
+                    />
+                  </View>
+                </>
               )}
             </View>
           )}

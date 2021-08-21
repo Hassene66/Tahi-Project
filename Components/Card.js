@@ -106,19 +106,32 @@ const Card = ({data: item, isRecent, isLiked, setLiked, withBorder}) => {
               alignItems: 'flex-start',
               marginBottom: 10,
             }}>
-            <View style={{flex: 1}}>
-              <Text>{item.place}</Text>
+            <View style={{}}>
+              <Text
+                style={{
+                  fontFamily: 'Cairo-Regular',
+                  fontSize: 12,
+                  paddingHorizontal: 5,
+                }}>
+                {item.place} <Text style={{color: '#CCCCCC'}}>|</Text>
+              </Text>
             </View>
             <View
               style={{
-                flex: 2,
-                alignItems: 'center',
+                justifyContent: 'flex-start',
               }}>
-              <Text>{item.location}</Text>
+              <Text style={{fontFamily: 'Cairo-Regular', fontSize: 12}}>
+                {item.location}
+              </Text>
             </View>
             <View style={{flex: 1, alignItems: 'flex-end'}}>
-              <Text style={{color: '#FF6B21'}}>
-                ({item.numberOfRequests} طلب)
+              <Text
+                style={{
+                  color: '#FF6B21',
+                  fontFamily: 'Cairo-Regular',
+                  fontSize: 12,
+                }}>
+                (طلب {item.numberOfRequests})
               </Text>
             </View>
           </View>
@@ -126,7 +139,9 @@ const Card = ({data: item, isRecent, isLiked, setLiked, withBorder}) => {
             <View
               style={{flexDirection: 'row', marginBottom: isRecent ? 9 : 0}}>
               <FontAwesome5 name="clock" size={20} style={{marginRight: 7}} />
-              <Text>منذ 3 ساعات</Text>
+              <Text style={{fontFamily: 'Cairo-Regular', fontSize: 12}}>
+                منذ 3 ساعات
+              </Text>
             </View>
           )}
         </View>
