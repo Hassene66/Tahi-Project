@@ -17,10 +17,13 @@ const SignInNextStep = ({phoneNum = 92221321321}) => {
       .required('الرجاء إدخال الكود')
       .typeError('الرجاء إدخال أرقام فقط')
       .test('', 'الرجاء إدخال كل الأرقام المطلوبة', code => {
-        String(code).length === 4;
+        return String(code).length === 4;
       })
       .test('', 'الرجاء إدخال أرقام فقط', code => {
-        return code !== ',';
+        for (i = 0; i < String(code).length; i++) {
+          if (String(code)[i] === ',') return false;
+        }
+        return true;
       }),
   });
 
