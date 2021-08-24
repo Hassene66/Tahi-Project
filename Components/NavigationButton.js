@@ -1,10 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
   TouchableWithoutFeedback,
   Linking,
+  Text,
 } from 'react-native';
+import Modal from 'react-native-modal';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconBackground from './IconBackground';
 const NavigationButton = ({
@@ -14,6 +16,7 @@ const NavigationButton = ({
   gradientColor = [],
   color = 'white',
   iconType = '',
+  showModal = null,
 }) => {
   phoneNumber = 54777481;
   return (
@@ -24,7 +27,7 @@ const NavigationButton = ({
           ? Linking.openURL(`tel:${phoneNumber}`)
           : iconType === 'message'
           ? Linking.openURL(`sms:${phoneNumber}`)
-          : console.log('other');
+          : showModal();
       }}>
       <View>
         <IconBackground gradientColor={gradientColor}>

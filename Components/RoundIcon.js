@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Feather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 
 const RoundIcon = ({
@@ -12,6 +13,7 @@ const RoundIcon = ({
   marginHorizontal,
   pageName = undefined,
   withShadow = true,
+  isFontAwesome = true,
 }) => {
   const navigation = useNavigation();
   const styles = StyleSheet.create({
@@ -47,14 +49,25 @@ const RoundIcon = ({
       <TouchableWithoutFeedback
         onPress={pageName && (() => navigation.navigate(pageName))}>
         <View style={[styles.icon, {backgroundColor: bgColor}]}>
-          <FontAwesome5
-            name={title}
-            size={15}
-            color="black"
-            solid={solid}
-            size={size}
-            color={color}
-          />
+          {isFontAwesome ? (
+            <FontAwesome5
+              name={title}
+              size={15}
+              color="black"
+              solid={solid}
+              size={size}
+              color={color}
+            />
+          ) : (
+            <Feather
+              name={title}
+              size={15}
+              color="black"
+              solid={solid}
+              size={size}
+              color={color}
+            />
+          )}
         </View>
       </TouchableWithoutFeedback>
     </View>

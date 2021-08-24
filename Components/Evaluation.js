@@ -1,13 +1,18 @@
 import React from 'react';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView, View} from 'react-native';
 import Comment from './Comment';
+import OverallRating from './OverallRating';
+import uuid from 'react-native-uuid';
 
 const Evaluation = ({EvaluationData}) => {
   return (
     <ScrollView
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}>
-      <Comment EvaluationData={EvaluationData} />
+      <View>
+        <OverallRating key={uuid.v4()} Rating={EvaluationData} />
+        <Comment EvaluationData={EvaluationData} />
+      </View>
     </ScrollView>
   );
 };
