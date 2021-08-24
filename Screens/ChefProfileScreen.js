@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {Text, View, I18nManager, Dimensions} from 'react-native';
+import {
+  Text,
+  View,
+  I18nManager,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from 'react-native';
 
 import Background from '../Components/Background';
 import ChefProfileContact from '../Components/ChefProfileContact';
@@ -10,8 +16,13 @@ import CustomChefNavigation from '../Components/CustomChefNavigation';
 import FoodPhotos from '../Components/FoodPhotos';
 import Evaluation from '../Components/Evaluation';
 import About from '../Components/About';
+import Modal from 'react-native-modal';
+import RoundIcon from '../Components/RoundIcon';
+import Title from '../Components/Title';
+import LargeTextInput from '../Components/LargeTextInput';
+import ImageInputList from '../Components/ImageInputList';
+
 const ChefProfileScreen = () => {
-  I18nManager.allowRTL(false);
   const ChefData = {
     chefInfo: {
       id: 1,
@@ -46,7 +57,7 @@ const ChefProfileScreen = () => {
       delivryServices: ['طبخ عن بعد', 'الطبخ مع التوصيل', 'الطبخ عند العميل'],
     },
     evaluation: {
-      overallRating: 4.2,
+      overallRating: 4.3,
       comments: [
         {
           name: 'الحسن بن المختار',
@@ -80,8 +91,34 @@ const ChefProfileScreen = () => {
           timeStamp: '21-10-2021',
         },
       ],
+      totalRatingNumber: 252,
+      ratings: [
+        {value: 190000, type: '5'},
+        {value: 90000, type: '4'},
+        {value: 5500, type: '3'},
+        {value: 1000, type: '2'},
+        {value: 1500, type: '1'},
+      ],
     },
   };
+
+  const [isVisible, setIsVisible] = useState(false);
+  const [biggerModal, setbiggerModal] = useState(false);
+  const [imageUris, setImageUris] = useState([]);
+
+  const handleAdd = uri => {
+    setImageUris([...imageUris, uri]);
+    console.log(imageUris);
+  };
+
+  const handleRemove = uri => {
+    setImageUris(...imageUris.filter(imageuri => imageuri !== uri));
+  };
+
+  const showModal = () => {
+    setIsVisible(!isVisible);
+  };
+
   const [chefData, setChefData] = useState(ChefData['chefInfo']);
   const setIsLiked = () => {
     setChefData({...chefData, liked: !chefData.liked});
@@ -90,49 +127,167 @@ const ChefProfileScreen = () => {
   const Tab = createMaterialTopTabNavigator();
 
   return (
-    <Background isInverted>
-      <ChefProfileContact />
-      <ListingItemSeperator height={45} />
-      <ChefInfo
-        data={chefData}
-        isRecent={false}
-        isLiked={chefData.liked}
-        setLiked={setIsLiked}
-        withBorder
-      />
-      <Tab.Navigator
-        tabBar={props => <CustomChefNavigation {...props} />}
-        tabBarOptions={{
-          showLabel: false,
-        }}
-        swipeVelocityImpact={0.4}
-        sceneContainerStyle={{
-          backgroundColor: 'transparent',
-        }}
-        backBehavior="history"
-        initialRouteName="FoodPhoto">
-        <Tab.Screen
-          name="FoodPhoto"
-          children={() => <FoodPhotos platePhotos={ChefData['platePhotos']} />}
+    <>
+      <Background isInverted>
+        <ChefProfileContact showModal={showModal} />
+        <ListingItemSeperator height={45} />
+        <ChefInfo
+          data={chefData}
+          isRecent={false}
+          isLiked={chefData.liked}
+          setLiked={setIsLiked}
+          withBorder
         />
-        <Tab.Screen
-          name="Evaluation"
-          children={() => (
-            <Evaluation EvaluationData={ChefData['evaluation']} />
-          )}
-        />
-        <Tab.Screen
-          name="About"
-          children={() => (
-            <About
-              platePhotos={ChefData['platePhotos']}
-              about={ChefData['about']}
-            />
-          )}
-        />
-      </Tab.Navigator>
-    </Background>
+        <Tab.Navigator
+          tabBar={props => <CustomChefNavigation {...props} />}
+          tabBarOptions={{
+            showLabel: false,
+          }}
+          swipeVelocityImpact={0.4}
+          sceneContainerStyle={{
+            backgroundColor: 'transparent',
+          }}
+          backBehavior="history"
+          initialRouteName="FoodPhoto">
+          <Tab.Screen
+            name="FoodPhoto"
+            children={() => (
+              <FoodPhotos platePhotos={ChefData['platePhotos']} />
+            )}
+          />
+          <Tab.Screen
+            name="Evaluation"
+            children={() => (
+              <Evaluation EvaluationData={ChefData['evaluation']} />
+            )}
+          />
+          <Tab.Screen
+            name="About"
+            children={() => (
+              <About
+                platePhotos={ChefData['platePhotos']}
+                about={ChefData['about']}
+              />
+            )}
+          />
+        </Tab.Navigator>
+      </Background>
+      <View>
+        <Modal
+          style={styles.modal}
+          visible={isVisible}
+          animationType="slide"
+          backdropOpacity={0}
+          animationInTiming={100}
+          propagateSwipe={true}
+          hideModalContentWhileAnimating={true}
+          useNativeDriver
+          onSwipeComplete={() => setIsVisible(false)}
+          swipeDirection="down"
+          onBackButtonPress={() => setIsVisible(false)}>
+          <React.Fragment>
+            <View style={styles.list}>
+              <View
+                style={{
+                  width: 50,
+                  borderRadius: 15,
+                  height: 7,
+                  backgroundColor: '#CCCCCC',
+                  justifyContent: 'center',
+                  alignSelf: 'center',
+                }}
+              />
+              <TouchableWithoutFeedback
+                onPress={() => {
+                  setIsVisible(false);
+                  setbiggerModal(true);
+                }}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <RoundIcon
+                    withShadow={false}
+                    size={32}
+                    bgColor="#E5E5E5"
+                    title="alert-circle"
+                    isFontAwesome={false}
+                  />
+                  <Title
+                    text="إرسال شكوى"
+                    titleStyle={{fontSize: 16, color: 'black', paddingRight: 9}}
+                  />
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
+          </React.Fragment>
+        </Modal>
+      </View>
+      {/* the second modal */}
+      <View>
+        <Modal
+          style={styles.modal2}
+          visible={biggerModal}
+          animationType="slide"
+          backdropOpacity={0}
+          animationInTiming={100}
+          propagateSwipe={true}
+          hideModalContentWhileAnimating={true}
+          useNativeDriver
+          onSwipeComplete={() => setbiggerModal(false)}
+          swipeDirection="down"
+          onBackButtonPress={() => setbiggerModal(false)}>
+          <TouchableWithoutFeedback onPress={() => console.log('pressed')}>
+            <React.Fragment>
+              <View style={styles.list2}>
+                <Title
+                  text="تفاصيل الشكوى"
+                  titleStyle={{color: 'black', fontSize: 15}}
+                />
+                <ListingItemSeperator vertical={false} />
+                <LargeTextInput />
+                <ImageInputList
+                  imageUri={imageUris}
+                  onAddImage={handleAdd}
+                  onRemoveImage={handleRemove}
+                />
+              </View>
+            </React.Fragment>
+          </TouchableWithoutFeedback>
+        </Modal>
+      </View>
+    </>
   );
 };
 
 export default ChefProfileScreen;
+
+const styles = StyleSheet.create({
+  modal: {
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    margin: 0,
+    alignItems: undefined,
+    justifyContent: 'flex-end',
+  },
+  list: {
+    paddingHorizontal: 15,
+    backgroundColor: 'white',
+    height: '13%',
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    overflow: 'hidden',
+    padding: 15,
+  },
+  modal2: {
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    margin: 0,
+    alignItems: undefined,
+    justifyContent: 'flex-end',
+  },
+  list2: {
+    paddingHorizontal: 15,
+    backgroundColor: 'white',
+    height: '50%',
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    overflow: 'hidden',
+    padding: 15,
+  },
+});

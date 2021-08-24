@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import PreviousPageNavigation from '../Components/PreviousPageNavigation';
 import NavigationButton from '../Components/NavigationButton';
 
-const ChefProfileContact = () => {
+const ChefProfileContact = ({showModal}) => {
   return (
     <View
       style={{
@@ -39,6 +39,7 @@ const ChefProfileContact = () => {
           iconName="ellipsis-v"
           color="black"
           iconType="plus"
+          showModal={showModal}
         />
       </View>
     </View>

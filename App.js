@@ -16,7 +16,6 @@ import FavouriteItemScreen from './Screens/FavouriteItemScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Background from './Components/Background';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import LinearGradient from 'react-native-linear-gradient';
 import Search from './Screens/SearchScreen';
 import CustomTabBar from './Components/CustomTabBar';
 import ChefProfileScreen from './Screens/ChefProfileScreen';
