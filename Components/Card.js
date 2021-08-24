@@ -7,14 +7,17 @@ import {
   View,
   ScrollView,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import RoundIcon from './RoundIcon';
 import Title from './Title';
-
+import {useNavigation} from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import uuid from 'react-native-uuid';
 
 const Card = ({data: item, isRecent, isLiked, setLiked, withBorder}) => {
+  const navigation = useNavigation();
+
   return (
     <View
       // the card view
@@ -153,19 +156,23 @@ const Card = ({data: item, isRecent, isLiked, setLiked, withBorder}) => {
           justifyContent: 'space-around',
         }}>
         {item.tags.map(tag => (
-          <View
+          <TouchableOpacity
             key={uuid.v4()}
-            style={{
-              backgroundColor: '#EFFCFF',
-              borderRadius: 10,
-              paddingHorizontal: 10,
-              justifyContent: 'center',
-            }}>
-            <Title
-              text={tag}
-              titleStyle={{marginTop: 0, color: '#30D2FA', fontSize: 12}}
-            />
-          </View>
+            onPress={() => navigation.navigate('DishesDetails', {name: tag})}>
+            <View
+              key={uuid.v4()}
+              style={{
+                backgroundColor: '#EFFCFF',
+                borderRadius: 10,
+                paddingHorizontal: 10,
+                justifyContent: 'center',
+              }}>
+              <Title
+                text={tag}
+                titleStyle={{marginTop: 0, color: '#30D2FA', fontSize: 12}}
+              />
+            </View>
+          </TouchableOpacity>
         ))}
         {item.tags.length > 5 && (
           <View

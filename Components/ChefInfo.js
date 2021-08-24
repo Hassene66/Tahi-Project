@@ -87,19 +87,30 @@ const ChefInfo = ({data: item, isRecent, isLiked, setLiked}) => {
               flexDirection: 'row',
               alignItems: 'flex-start',
             }}>
-            <View style={{flex: 1}}>
-              <Text>{item.place}</Text>
+            <View>
+              <Text
+                style={{
+                  fontFamily: 'Cairo-Regular',
+                  fontSize: 12,
+                  paddingHorizontal: 5,
+                }}>
+                {item.place}
+                {'  '}
+                <Text style={{color: '#CCCCCC', fontWeight: 'bold'}}>|</Text>
+              </Text>
             </View>
-            <View
-              style={{
-                flex: 2,
-                alignItems: 'center',
-              }}>
-              <Text>{item.location}</Text>
+            <View style={{}}>
+              <Text
+                style={{
+                  fontFamily: 'Cairo-Regular',
+                  fontSize: 12,
+                }}>
+                {item.location}
+              </Text>
             </View>
           </View>
           <View style={{alignItems: 'flex-start'}}>
-            <Text style={{color: '#FF6B21'}}>
+            <Text style={{color: '#FF6B21', fontFamily: 'Cairo-SemiBold'}}>
               ({item.numberOfRequests} طلب)
             </Text>
           </View>

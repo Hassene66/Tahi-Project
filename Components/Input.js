@@ -11,7 +11,7 @@ const Input = ({
   name,
   show = true,
 }) => {
-  const {handleChange, setFieldTouched, errors} = useFormikContext();
+  const {handleChange, errors} = useFormikContext();
 
   return (
     <>

@@ -20,6 +20,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import Search from './Screens/SearchScreen';
 import CustomTabBar from './Components/CustomTabBar';
 import ChefProfileScreen from './Screens/ChefProfileScreen';
+import DishesDetails from './Components/DishesDetails';
+import AddOrderScreen from './Screens/AddOrderScreen';
 
 const App = () => {
   I18nManager.forceRTL(true);
@@ -40,7 +42,7 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator
     screenOptions={{headerShown: false}}
-    initialRouteName="SignInNextStep">
+    initialRouteName="AddOrder">
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignInNextStep" component={SignInNextStep} />
     <Stack.Screen name="Subscribe" component={Subscribe} />
@@ -49,6 +51,8 @@ const StackNavigator = () => (
     <Stack.Screen name="Search" component={Search} />
     <Stack.Screen name="CustomTabBar" component={CustomTabBar} />
     <Stack.Screen name="ChefProfile" component={ChefProfileScreen} />
+    <Stack.Screen name="DishesDetails" component={DishesDetails} />
+    <Stack.Screen name="AddOrder" component={AddOrderScreen} />
   </Stack.Navigator>
 );
 
