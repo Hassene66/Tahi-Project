@@ -28,6 +28,7 @@ const DateTimePicker = ({placeholder = 'لوريم ايبسوم ', name}) => {
 
   const handleConfirm = date => {
     setSelectedItem(moment(date).format('DD/MM/YYYY HH:mm'));
+    setFieldValue(name, moment(date).format('DD/MM/YYYY HH:mm'));
     hideDatePicker();
   };
 

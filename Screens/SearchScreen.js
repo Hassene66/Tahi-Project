@@ -1,16 +1,13 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Text, FlatList} from 'react-native';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 import Form from '../Components/AppForm';
 import Background from '../Components/Background';
 import Header from '../Components/Header';
 import Picker from '../Components/Picker';
 import uuid from 'react-native-uuid';
 import RegionPicker from '../Components/RegionSearch';
-import * as yup from 'yup';
-import ConfirmationButton from '../Components/ConfirmationButton';
 import Title from '../Components/Title';
 import RadioGroup from '../lib/react-native-radio-buttons-group';
-import Card from '../Components/Card';
 import SearchResult from '../Components/SearchResult';
 const SearchScreen = () => {
   const region = [

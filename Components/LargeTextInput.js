@@ -1,25 +1,53 @@
 import React from 'react';
-import {View, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
+import {useFormikContext} from 'formik';
+import ErrorMessage from './ErrorMessage';
 
-const LargeTextInput = () => {
+const LargeTextInput = ({
+  name = '',
+  placeholder = 'نص الشكوى',
+  containerStyle = {},
+  textStyle = {},
+}) => {
+  const {handleChange, errors} = useFormikContext();
+
   return (
-    <View
-      style={{
-        borderRadius: 9,
-        borderColor: '#707070',
-        borderWidth: 1,
-        justifyContent: 'flex-end',
-      }}>
-      <TextInput
-        textAlignVertical="top"
-        multiline
-        numberOfLines={5}
-        placeholder="نص الشكوى"
-        placeholderTextColor="black"
-        style={{padding: 10}}
-      />
-    </View>
+    <>
+      <View
+        style={[
+          styles.container,
+          containerStyle,
+          errors[name] && styles.error,
+        ]}>
+        <TextInput
+          textAlignVertical="top"
+          multiline
+          numberOfLines={5}
+          placeholder={placeholder}
+          placeholderTextColor="black"
+          style={[styles.text, textStyle]}
+          onChangeText={handleChange(name)}
+        />
+      </View>
+      <ErrorMessage error={errors[name]} />
+    </>
   );
 };
 
+const styles = StyleSheet.create({
+  text: {
+    padding: 10,
+    fontFamily: 'Cairo-SemiBold',
+  },
+  container: {
+    borderRadius: 9,
+    borderColor: '#707070',
+    borderWidth: 1,
+    textAlign: 'right',
+  },
+  error: {
+    borderWidth: 2,
+    borderColor: 'red',
+  },
+});
 export default LargeTextInput;

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
+import {StyleSheet, ScrollView, Text} from 'react-native';
 import Background from '../Components/Background';
 import ChefInfo from '../Components/ChefInfo';
 import Header from '../Components/Header';
@@ -9,6 +9,11 @@ import DateTimePicker from '../Components/DateTimePicker';
 import * as yup from 'yup';
 import Picker from '../Components/Picker';
 import ConfirmationButton from '../Components/ConfirmationButton';
+import RadioGroup from '../lib/react-native-radio-buttons-group';
+import uuid from 'react-native-uuid';
+import LargeTextInput from '../Components/LargeTextInput';
+import {useFormikContext} from 'formik';
+import DeliveryServices from '../Components/DeliveryServices';
 
 const AddOrderScreen = () => {
   const ChefData = {
@@ -131,6 +136,12 @@ const AddOrderScreen = () => {
       }),
     country: yup.object().required('الرجاء إدخال المدينة').nullable(),
     region: yup.object().required('الرجاء إدخال المنطقة').nullable(),
+    deliveryService: yup
+      .array()
+      .required('الرجاء إدخال خدمة التوصيل')
+      .nullable(),
+    dateTime: yup.string().required('الرجاء إدخال التاريخ و الوقت'),
+    details: yup.string().required('الرجاء إدخال التاريخ و الوقت'),
   });
 
   return (
@@ -150,6 +161,9 @@ const AddOrderScreen = () => {
           dishes: [],
           country: null,
           region: null,
+          deliveryService: null,
+          dateTime: '',
+          details: '',
         }}
         onSubmit={values => console.log(values)}
         validationSchema={schema}>
@@ -173,9 +187,18 @@ const AddOrderScreen = () => {
           />
           <Picker placeholder="المدينة" name="country" list={list} />
           <Picker placeholder="المنطقة" name="region" list={list} />
-          <DateTimePicker name="DateTime" placeholder="التاريخ و الوقت" />
+          <DateTimePicker name="dateTime" placeholder="التاريخ و الوقت" />
+          <Text style={styles.text}>خدمة التوصيل</Text>
 
-          <ConfirmationButton />
+          <DeliveryServices />
+          <Text style={styles.text}>تفاصيل</Text>
+          <LargeTextInput
+            name="details"
+            placeholder="نص التفاصيل"
+            containerStyle={styles.container}
+            textStyle={styles.details}
+          />
+          <ConfirmationButton label="تأكيد" />
         </ScrollView>
       </Form>
     </Background>
@@ -184,4 +207,21 @@ const AddOrderScreen = () => {
 
 export default AddOrderScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  text: {
+    fontFamily: 'Cairo-Bold',
+    paddingVertical: 15,
+    fontSize: 16,
+  },
+  details: {
+    fontFamily: 'Cairo-SemiBold',
+  },
+
+  container: {
+    backgroundColor: 'white',
+    borderColor: 'white',
+    elevation: 12,
+    shadowColor: 'rgba(255,78,54,18)',
+    marginBottom: 10,
+  },
+});
