@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
 } from 'react-native';
-
+import * as yup from 'yup';
 import Background from '../Components/Background';
 import ChefProfileContact from '../Components/ChefProfileContact';
 import ChefInfo from '../Components/ChefInfo';
@@ -22,6 +22,8 @@ import Title from '../Components/Title';
 import LargeTextInput from '../Components/LargeTextInput';
 import ImageInputList from '../Components/ImageInputList';
 import Button from '../Components/Button';
+import Form from '../Components/AppForm';
+import ConfirmationButton from '../Components/ConfirmationButton';
 
 const ChefProfileScreen = () => {
   const ChefData = {
@@ -112,7 +114,7 @@ const ChefProfileScreen = () => {
   };
 
   const handleRemove = uri => {
-    setImageUris(...imageUris.filter(imageuri => imageuri !== uri));
+    setImageUris(imageUris.filter(imageuri => imageuri !== uri));
     console.log(uri);
   };
 
@@ -126,6 +128,15 @@ const ChefProfileScreen = () => {
   };
 
   const Tab = createMaterialTopTabNavigator();
+  const schema = yup.object().shape({
+    complaintText: yup
+      .string()
+      .required('الرجاء إدخال نص الشكوى')
+      .test('', 'الرجاء إدخال الاطباق ', text => {
+        console.log('test : ' + text);
+        return true;
+      }),
+  });
 
   return (
     <>
@@ -191,8 +202,8 @@ const ChefProfileScreen = () => {
               <View
                 style={{
                   width: 50,
-                  borderRadius: 15,
-                  height: 7,
+                  borderRadius: 4,
+                  height: 9,
                   backgroundColor: '#CCCCCC',
                   justifyContent: 'center',
                   alignSelf: 'center',
@@ -203,17 +214,27 @@ const ChefProfileScreen = () => {
                   setIsVisible(false);
                   setbiggerModal(true);
                 }}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    marginTop: 10,
+                    marginLeft: 10,
+                  }}>
                   <RoundIcon
                     withShadow={false}
-                    size={32}
+                    size={27}
                     bgColor="#E5E5E5"
                     title="alert-circle"
                     isFontAwesome={false}
                   />
                   <Title
                     text="إرسال شكوى"
-                    titleStyle={{fontSize: 16, color: 'black', paddingRight: 9}}
+                    titleStyle={{
+                      fontSize: 16,
+                      color: 'black',
+                      paddingRight: 9,
+                    }}
                   />
                 </View>
               </TouchableWithoutFeedback>
@@ -222,54 +243,61 @@ const ChefProfileScreen = () => {
         </Modal>
       </View>
       {/* the second modal */}
-      <View>
-        <Modal
-          style={styles.modal2}
-          visible={biggerModal}
-          animationType="slide"
-          backdropOpacity={0}
-          animationInTiming={100}
-          propagateSwipe={true}
-          hideModalContentWhileAnimating={true}
-          useNativeDriver
-          onSwipeComplete={() => setbiggerModal(false)}
-          swipeDirection="down"
-          onBackButtonPress={() => setbiggerModal(false)}>
-          <TouchableWithoutFeedback onPress={() => console.log('pressed')}>
-            <React.Fragment>
-              <View style={styles.list2}>
-                <View
-                  style={{
-                    width: 50,
-                    borderRadius: 15,
-                    height: 7,
-                    backgroundColor: '#CCCCCC',
-                    justifyContent: 'center',
-                    alignSelf: 'center',
-                  }}
-                />
-                <Title
-                  text="تفاصيل الشكوى"
-                  titleStyle={{color: 'black', fontSize: 15}}
-                />
-                <ListingItemSeperator vertical={false} />
-                <LargeTextInput />
-                <View style={styles.imageInput}>
-                  <ImageInputList
-                    imageUris={imageUris}
-                    onAddImage={uri => handleAdd(uri)}
-                    onRemoveImage={handleRemove}
+      <Form
+        initialValues={{
+          complaintText: '',
+        }}
+        onSubmit={values => console.log(values)}
+        validationSchema={schema}>
+        <View>
+          <Modal
+            style={styles.modal2}
+            visible={biggerModal}
+            animationType="slide"
+            backdropOpacity={0}
+            animationInTiming={100}
+            propagateSwipe={true}
+            hideModalContentWhileAnimating={true}
+            useNativeDriver
+            onSwipeComplete={() => setbiggerModal(false)}
+            swipeDirection="down"
+            onBackButtonPress={() => setbiggerModal(false)}>
+            <TouchableWithoutFeedback onPress={() => console.log('pressed')}>
+              <React.Fragment>
+                <View style={styles.list2}>
+                  <View
+                    style={{
+                      width: 50,
+                      borderRadius: 4,
+                      height: 9,
+                      backgroundColor: '#CCCCCC',
+                      justifyContent: 'center',
+                      alignSelf: 'center',
+                    }}
+                  />
+                  <Title
+                    text="تفاصيل الشكوى"
+                    titleStyle={{marginTop: 30, color: 'black', fontSize: 15}}
+                  />
+                  <ListingItemSeperator vertical={false} />
+                  <LargeTextInput name="complaintText" />
+                  <View style={styles.imageInput}>
+                    <ImageInputList
+                      imageUris={imageUris}
+                      onAddImage={uri => handleAdd(uri)}
+                      onRemoveImage={handleRemove}
+                    />
+                  </View>
+                  <ConfirmationButton
+                    label="ارسال الشكوى"
+                    onPress={() => setbiggerModal(false)}
                   />
                 </View>
-                <Button
-                  label="ارسال الشكوى"
-                  onPress={() => setbiggerModal(false)}
-                />
-              </View>
-            </React.Fragment>
-          </TouchableWithoutFeedback>
-        </Modal>
-      </View>
+              </React.Fragment>
+            </TouchableWithoutFeedback>
+          </Modal>
+        </View>
+      </Form>
     </>
   );
 };
@@ -287,8 +315,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: 'white',
     height: '13%',
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
     overflow: 'hidden',
     padding: 15,
   },
@@ -301,9 +329,8 @@ const styles = StyleSheet.create({
   list2: {
     paddingHorizontal: 15,
     backgroundColor: 'white',
-    height: '54%',
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
     overflow: 'hidden',
     padding: 15,
   },

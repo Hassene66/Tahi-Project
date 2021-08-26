@@ -30,7 +30,7 @@ export default ItemRadioBtn;
 const styles = StyleSheet.create({
   textStyle: {fontFamily: 'Cairo-SemiBold'},
   titleStyle: {
-    marginBottom: 20,
+    marginBottom: 5,
     fontSize: 20,
     marginLeft: 25,
   },

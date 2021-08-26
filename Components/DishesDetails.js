@@ -57,7 +57,7 @@ const DishesDetails = ({data = []}) => {
           </>
         )}
       />
-      <Button label="أضف" onPress={() => navigation.navigate('')} />
+      <Button label="أضف" />
     </Background>
   );
 };

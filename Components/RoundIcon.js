@@ -23,8 +23,8 @@ const RoundIcon = ({
       marginHorizontal: 0,
     },
     icon: {
-      height: 50,
-      width: 50,
+      height: 40,
+      width: 40,
       borderRadius: 100,
       backgroundColor: 'white',
       justifyContent: 'center',

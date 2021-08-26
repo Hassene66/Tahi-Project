@@ -19,7 +19,7 @@ const SearchResult = ({data = []}) => {
       }),
     );
   };
-  let filteredData = filter(data, {
+  let filteredData = filter(results, {
     keywords: [`name:${values.searchForChef}`, `place:${values.region}`],
     caseSensitive: false,
   });

@@ -133,6 +133,17 @@ const Picker = ({
           onBackButtonPress={() => setIsVisible(false)}>
           {isRadio ? (
             <View style={styles.list}>
+              <View
+                style={{
+                  marginTop: 15,
+                  width: 50,
+                  borderRadius: 4,
+                  height: 9,
+                  backgroundColor: '#CCCCCC',
+                  justifyContent: 'center',
+                  alignSelf: 'center',
+                }}
+              />
               <ItemRadioBtn
                 name={name}
                 title={placeholder}
@@ -146,6 +157,17 @@ const Picker = ({
             </View>
           ) : (
             <View style={styles.list}>
+              <View
+                style={{
+                  marginTop: 15,
+                  width: 50,
+                  borderRadius: 4,
+                  height: 9,
+                  backgroundColor: '#CCCCCC',
+                  justifyContent: 'center',
+                  alignSelf: 'center',
+                }}
+              />
               <View
                 style={{
                   flexDirection: 'row',
@@ -395,8 +417,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: 'white',
     height: '80%',
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
     overflow: 'hidden',
   },
   titleStyle: {

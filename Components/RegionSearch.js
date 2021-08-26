@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   list: {
     backgroundColor: 'white',
     height: '60%',
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
   },
 });

@@ -12,7 +12,6 @@ const About = ({
   platePhotos,
   about: {countryName, location, services, delivryServices},
 }) => {
-  console.log(services);
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
