@@ -115,7 +115,6 @@ const ChefProfileScreen = () => {
 
   const handleRemove = uri => {
     setImageUris(imageUris.filter(imageuri => imageuri !== uri));
-    console.log(uri);
   };
 
   const showModal = () => {

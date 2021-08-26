@@ -1,10 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
-import {useFormikContext} from 'formik';
 import ErrorMessage from './ErrorMessage';
 
 const LargeTextInput = ({
-  name = '',
   placeholder = 'نص الشكوى',
   containerStyle = {},
   textStyle = {},
@@ -12,12 +10,7 @@ const LargeTextInput = ({
   const {handleChange, errors, values} = useFormikContext();
   return (
     <>
-      <View
-        style={[
-          styles.container,
-          containerStyle,
-          errors[name] && styles.error,
-        ]}>
+      <View style={[styles.container, containerStyle]}>
         <TextInput
           textAlignVertical="top"
           multiline
@@ -29,7 +22,6 @@ const LargeTextInput = ({
           value={values[name]}
         />
       </View>
-      <ErrorMessage error={errors[name]} />
     </>
   );
 };
