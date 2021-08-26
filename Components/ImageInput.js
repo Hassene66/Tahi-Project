@@ -16,7 +16,7 @@ const ImageInput = ({imageUri, onChangeImage}) => {
     else
       Alert.alert('حذف', 'هل أنت متأكد أنك تريد حذف هذه الصورة ؟', [
         {text: 'لا'},
-        {text: 'نعم', onPress: () => onChangeImage(null)},
+        {text: 'نعم', onPress: () => onChangeImage(imageUri)},
       ]);
   };
 

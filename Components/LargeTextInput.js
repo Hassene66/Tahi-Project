@@ -9,8 +9,7 @@ const LargeTextInput = ({
   containerStyle = {},
   textStyle = {},
 }) => {
-  const {handleChange, errors} = useFormikContext();
-
+  const {handleChange, errors, values} = useFormikContext();
   return (
     <>
       <View
@@ -27,6 +26,7 @@ const LargeTextInput = ({
           placeholderTextColor="black"
           style={[styles.text, textStyle]}
           onChangeText={handleChange(name)}
+          value={values[name]}
         />
       </View>
       <ErrorMessage error={errors[name]} />

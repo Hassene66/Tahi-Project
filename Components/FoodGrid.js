@@ -26,8 +26,8 @@ const FoodGrid = ({data = [], handleCheck = () => null, setData, name}) => {
           style={{
             borderRadius: 20,
             height: Dimensions.get('window').width / 2 - 80,
-            overflow: 'hidden',
             width: Dimensions.get('window').width / 2 - 35,
+            overflow: 'hidden',
           }}>
           <CheckBox
             style={{

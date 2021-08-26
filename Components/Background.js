@@ -7,7 +7,7 @@ const Background = ({children, isInverted, withPadding = true}) => {
     <LinearGradient
       colors={
         isInverted
-          ? ['#FFF8F4', '#FFEFE7', '#FEE4D7']
+          ? ['#FFFBFA', '#FFF8F5', '#fff1eb', '#FEE4D7']
           : ['#FEE4D7', '#FFEFE7', '#FFF8F4']
       }
       style={[styles.bg, withPadding && styles.padding]}>

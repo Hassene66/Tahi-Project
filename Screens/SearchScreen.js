@@ -116,6 +116,7 @@ const SearchScreen = () => {
   ];
   const searchResults = [
     {
+      id: uuid.v4(),
       name: 'علي عبد الله',
       place: 'مكه المكرمة',
       location: 'منطقة باب المنارة',
@@ -131,6 +132,7 @@ const SearchScreen = () => {
       deliveryService: 'الطبخ عند العميل',
     },
     {
+      id: uuid.v4(),
       name: 'حسَان أيّوب',
       place: 'تونس',
       location: 'المهدية',
@@ -146,6 +148,7 @@ const SearchScreen = () => {
       deliveryService: 'الطبخ عند العميل',
     },
     {
+      id: uuid.v4(),
       name: 'مروان أيّوب',
       place: 'تونس',
       location: 'المهدية',
@@ -161,6 +164,7 @@ const SearchScreen = () => {
       deliveryService: 'طبخ عن بعد',
     },
     {
+      id: uuid.v4(),
       name: 'مروان أيّوب',
       place: 'تونس',
       location: 'المهدية',

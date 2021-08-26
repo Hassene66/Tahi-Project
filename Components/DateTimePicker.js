@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: 'white',
     height: '80%',
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
     overflow: 'hidden',
   },
 });
