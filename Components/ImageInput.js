@@ -1,15 +1,22 @@
 import React from 'react';
-import {View, StyleSheet, Image, TouchableWithoutFeedback} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+  Alert,
+} from 'react-native';
 import RoundIcon from './RoundIcon';
 import {launchImageLibrary} from 'react-native-image-picker';
+import Feather from 'react-native-vector-icons/Feather';
 
 const ImageInput = ({imageUri, onChangeImage}) => {
   const handlePress = () => {
     if (!imageUri) selectImage();
     else
-      Alert.alert('Delete', 'Are you  sure you wanna delete this image ?', [
-        {text: 'Yes', onPress: () => onChangeImage(null)},
-        {text: 'No'},
+      Alert.alert('حذف', 'هل أنت متأكد أنك تريد حذف هذه الصورة ؟', [
+        {text: 'لا'},
+        {text: 'نعم', onPress: () => onChangeImage(null)},
       ]);
   };
 
@@ -17,12 +24,10 @@ const ImageInput = ({imageUri, onChangeImage}) => {
     launchImageLibrary(
       {
         mediaType: 'photo',
-        quality: 0.5,
-        maxHeight: 120,
-        maxWidth: 120,
+        quality: 1,
       },
       ({didCancel, assets}) => {
-        if (!didCancel) onChangeImage(assets[assets.length - 1].uri);
+        if (!didCancel) onChangeImage(assets[0].uri);
       },
     );
   };
@@ -30,16 +35,7 @@ const ImageInput = ({imageUri, onChangeImage}) => {
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
       <View style={styles.container}>
-        {!imageUri && (
-          <RoundIcon
-            isFontAwesome={false}
-            title="plus-circle"
-            size={35}
-            withShadow={false}
-            color="#FF5F22"
-            bgColor="transparent"
-          />
-        )}
+        {!imageUri && <Feather name="plus-circle" size={35} color="#FF5F22" />}
         {imageUri && <Image source={{uri: imageUri}} style={styles.image} />}
       </View>
     </TouchableWithoutFeedback>
@@ -47,12 +43,13 @@ const ImageInput = ({imageUri, onChangeImage}) => {
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF4EF',
-    borderRadius: 17,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 120,
-    width: 120,
+    backgroundColor: '#FFF4EF',
+    borderRadius: 17,
+    height: 140,
+    width: 140,
+    overflow: 'hidden',
   },
   image: {
     width: '100%',

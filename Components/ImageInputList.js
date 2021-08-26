@@ -14,6 +14,10 @@ const ImageInputList = ({imageUris = [], onRemoveImage, onAddImage}) => {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}>
         <View style={styles.container}>
+          <ImageInput
+            style={styles.addImage}
+            onChangeImage={uri => onAddImage(uri)}
+          />
           {imageUris.map(uri => (
             <View key={uuid.v4()} style={styles.image}>
               <ImageInput
@@ -22,7 +26,6 @@ const ImageInputList = ({imageUris = [], onRemoveImage, onAddImage}) => {
               />
             </View>
           ))}
-          <ImageInput onChangeImage={uri => onAddImage(uri)} />
         </View>
       </ScrollView>
     </View>
@@ -33,7 +36,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   image: {
-    marginRight: 10,
+    marginHorizontal: 5,
+  },
+  addImage: {
+    marginHorizontal: 5,
   },
 });
 

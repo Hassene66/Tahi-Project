@@ -21,6 +21,7 @@ import RoundIcon from '../Components/RoundIcon';
 import Title from '../Components/Title';
 import LargeTextInput from '../Components/LargeTextInput';
 import ImageInputList from '../Components/ImageInputList';
+import Button from '../Components/Button';
 
 const ChefProfileScreen = () => {
   const ChefData = {
@@ -108,11 +109,11 @@ const ChefProfileScreen = () => {
 
   const handleAdd = uri => {
     setImageUris([...imageUris, uri]);
-    console.log(imageUris);
   };
 
   const handleRemove = uri => {
     setImageUris(...imageUris.filter(imageuri => imageuri !== uri));
+    console.log(uri);
   };
 
   const showModal = () => {
@@ -237,16 +238,32 @@ const ChefProfileScreen = () => {
           <TouchableWithoutFeedback onPress={() => console.log('pressed')}>
             <React.Fragment>
               <View style={styles.list2}>
+                <View
+                  style={{
+                    width: 50,
+                    borderRadius: 15,
+                    height: 7,
+                    backgroundColor: '#CCCCCC',
+                    justifyContent: 'center',
+                    alignSelf: 'center',
+                  }}
+                />
                 <Title
                   text="تفاصيل الشكوى"
                   titleStyle={{color: 'black', fontSize: 15}}
                 />
                 <ListingItemSeperator vertical={false} />
                 <LargeTextInput />
-                <ImageInputList
-                  imageUri={imageUris}
-                  onAddImage={handleAdd}
-                  onRemoveImage={handleRemove}
+                <View style={styles.imageInput}>
+                  <ImageInputList
+                    imageUris={imageUris}
+                    onAddImage={uri => handleAdd(uri)}
+                    onRemoveImage={handleRemove}
+                  />
+                </View>
+                <Button
+                  label="ارسال الشكوى"
+                  onPress={() => setbiggerModal(false)}
                 />
               </View>
             </React.Fragment>
@@ -284,10 +301,13 @@ const styles = StyleSheet.create({
   list2: {
     paddingHorizontal: 15,
     backgroundColor: 'white',
-    height: '50%',
+    height: '54%',
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     overflow: 'hidden',
     padding: 15,
+  },
+  imageInput: {
+    padding: 13,
   },
 });
