@@ -2,10 +2,12 @@ import React from 'react';
 import {View, SafeAreaView, Image, Dimensions, FlatList} from 'react-native';
 import ListingItemSeperator from './ListingItemSeperator';
 import Title from './Title';
+import uuid from 'react-native-uuid';
 const FoodPhotos = ({platePhotos: arrImages}) => {
   renderImages = ({item: {name, url}, index}) => {
     return (
       <View
+        keyExtractor={uuid.v4()}
         style={[
           {flex: 1, alignItems: 'flex-start'},
           index % 2 == 0 ? {marginRight: 3} : {marginLeft: 3},

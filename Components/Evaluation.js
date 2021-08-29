@@ -7,6 +7,7 @@ import uuid from 'react-native-uuid';
 const Evaluation = ({EvaluationData}) => {
   return (
     <ScrollView
+      key={uuid.v4()}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}>
       <View>
