@@ -3,7 +3,12 @@ import {View} from 'react-native';
 import {TouchableWithoutFeedback, Dimensions} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Title from './Title';
-const CustomChefNavigation = ({state, descriptors, navigation}) => {
+const CustomChefNavigation = ({
+  state,
+  descriptors,
+  navigation,
+  PagesName = null,
+}) => {
   return (
     <LinearGradient
       start={{x: 0, y: 0}}
@@ -55,7 +60,7 @@ const CustomChefNavigation = ({state, descriptors, navigation}) => {
                             borderRadius: 15,
                           }}>
                           <Title
-                            text="صور الأطباق"
+                            text={PagesName[0]}
                             titleStyle={{color: '#FF5F22', fontSize: 14}}
                           />
                         </View>
@@ -69,7 +74,7 @@ const CustomChefNavigation = ({state, descriptors, navigation}) => {
                           alignItems: 'center',
                         }}>
                         <Title
-                          text="صور الأطباق"
+                          text={PagesName[0]}
                           titleStyle={{color: 'white', fontSize: 14}}
                         />
                       </View>
@@ -96,7 +101,7 @@ const CustomChefNavigation = ({state, descriptors, navigation}) => {
                             borderRadius: 15,
                           }}>
                           <Title
-                            text="تقييم"
+                            text={PagesName[1]}
                             titleStyle={{color: '#FF5F22', fontSize: 14}}
                           />
                         </View>
@@ -110,7 +115,7 @@ const CustomChefNavigation = ({state, descriptors, navigation}) => {
                           alignItems: 'center',
                         }}>
                         <Title
-                          text="تقييم"
+                          text={PagesName[1]}
                           titleStyle={{color: 'white', fontSize: 14}}
                         />
                       </View>
@@ -137,7 +142,7 @@ const CustomChefNavigation = ({state, descriptors, navigation}) => {
                             borderRadius: 15,
                           }}>
                           <Title
-                            text="فيما يتعلق"
+                            text={PagesName[2]}
                             titleStyle={{color: '#FF5F22', fontSize: 14}}
                           />
                         </View>
@@ -151,7 +156,7 @@ const CustomChefNavigation = ({state, descriptors, navigation}) => {
                           alignItems: 'center',
                         }}>
                         <Title
-                          text="فيما يتعلق"
+                          text={PagesName[2]}
                           titleStyle={{color: 'white', fontSize: 14}}
                         />
                       </View>
@@ -168,66 +173,3 @@ const CustomChefNavigation = ({state, descriptors, navigation}) => {
 };
 
 export default CustomChefNavigation;
-
-{
-  /* <View
-  style={{
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }}>
-  <View
-    style={{
-      height: 50,
-      width: 40,
-      backgroundColor: 'white',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 15,
-    }}>
-    <Title
-      text="صور الأطباق"
-      titleStyle={{color: '#FF5F22', fontSize: 14}}
-    />
-  </View>
-</View>
-<View
-  style={{
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }}>
-  <View
-    style={{
-      height: '65%',
-      width: '75%',
-      backgroundColor: 'white',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 15,
-    }}>
-    <Title text="تقييم" titleStyle={{color: '#FF5F22', fontSize: 14}} />
-  </View>
-</View>
-<View
-  style={{
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }}>
-  <View
-    style={{
-      height: '65%',
-      width: '75%',
-      backgroundColor: 'white',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 15,
-    }}>
-    <Title
-      text="فيما يتعلق"
-      titleStyle={{color: '#FF5F22', fontSize: 14}}
-    />
-  </View>
-</View> */
-}
