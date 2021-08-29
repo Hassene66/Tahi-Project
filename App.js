@@ -7,10 +7,6 @@ import Subscribe from './Screens/SubscribeScreen';
 import SignInNextStep from './Screens/SignInNextStepScreen';
 import SignIn from './Screens/SignInScreen';
 import HomePage from './Screens/HomePageScreen';
-import Card from './Components/Card';
-import LogoV2 from './Components/LogoV2';
-import Picker from './Components/Picker';
-import ErrorMessage from './Components/ErrorMessage';
 
 import FavouriteItemScreen from './Screens/FavouriteItemScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -21,6 +17,7 @@ import CustomTabBar from './Components/CustomTabBar';
 import ChefProfileScreen from './Screens/ChefProfileScreen';
 import DishesDetails from './Components/DishesDetails';
 import AddOrderScreen from './Screens/AddOrderScreen';
+import MyOrdersScreen from './Screens/MyOrdersScreen';
 
 const App = () => {
   I18nManager.forceRTL(true);
@@ -41,7 +38,7 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator
     screenOptions={{headerShown: false}}
-    initialRouteName="AddOrder">
+    initialRouteName="HomePage">
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignInNextStep" component={SignInNextStep} />
     <Stack.Screen name="Subscribe" component={Subscribe} />
@@ -102,7 +99,7 @@ const TabNavigator = () => (
     />
     <Tab.Screen
       name="orderScreen"
-      component={OrderScreen}
+      component={MyOrdersScreen}
       options={{
         tabBarIcon: ({color, size}) => (
           <FontAwesome5 name="newspaper" size={size} color={color} />

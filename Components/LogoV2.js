@@ -30,6 +30,7 @@ const LogoV2 = ({navigation}) => {
           color="#464646"
           bgColor="#EDEBEB"
           marginHorizontal={5}
+          withShadow={false}
         />
         <RoundIcon
           title="search"
@@ -39,6 +40,7 @@ const LogoV2 = ({navigation}) => {
           bgColor="#EDEBEB"
           marginHorizontal={5}
           pageName="Search"
+          withShadow={false}
         />
 
         <RoundIcon
@@ -49,6 +51,7 @@ const LogoV2 = ({navigation}) => {
           bgColor="#EDEBEB"
           marginHorizontal={5}
           pageName="FavouriteItemScreen"
+          withShadow={false}
         />
       </View>
     </View>

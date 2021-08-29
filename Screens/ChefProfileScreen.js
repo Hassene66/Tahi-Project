@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Text,
-  View,
-  I18nManager,
-  StyleSheet,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import {View, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import * as yup from 'yup';
 import Background from '../Components/Background';
 import ChefProfileContact from '../Components/ChefProfileContact';
@@ -143,7 +137,12 @@ const ChefProfileScreen = () => {
           withBorder
         />
         <Tab.Navigator
-          tabBar={props => <CustomChefNavigation {...props} />}
+          tabBar={props => (
+            <CustomChefNavigation
+              {...props}
+              PagesName={['صور الأطباق', 'تقييم', 'فيما يتعلق']}
+            />
+          )}
           tabBarOptions={{
             showLabel: false,
           }}
