@@ -21,7 +21,6 @@ import RoundIcon from '../Components/RoundIcon';
 import Title from '../Components/Title';
 import LargeTextInput from '../Components/LargeTextInput';
 import ImageInputList from '../Components/ImageInputList';
-import Button from '../Components/Button';
 import Form from '../Components/AppForm';
 import ConfirmationButton from '../Components/ConfirmationButton';
 
@@ -128,13 +127,7 @@ const ChefProfileScreen = () => {
 
   const Tab = createMaterialTopTabNavigator();
   const schema = yup.object().shape({
-    complaintText: yup
-      .string()
-      .required('الرجاء إدخال نص الشكوى')
-      .test('', 'الرجاء إدخال الاطباق ', text => {
-        console.log('test : ' + text);
-        return true;
-      }),
+    complaintText: yup.string().required('الرجاء إدخال نص الشكوى'),
   });
 
   return (

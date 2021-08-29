@@ -2,9 +2,7 @@ import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import FoodPhotos from './FoodPhotos';
 import Title from './Title';
-import CheckBox from 'react-native-check-box';
-
-// : {countryName, location, services}
+import uuid from 'react-native-uuid';
 
 import DeliveryService from './DeliveryService';
 import ListingItemSeperator from './ListingItemSeperator';
@@ -16,7 +14,7 @@ const About = ({
     <ScrollView
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}>
-      <View style={styles.container}>
+      <View key={uuid.v4()} style={styles.container}>
         <Title
           text="المدينة"
           titleStyle={{marginTop: 5, color: 'black', fontSize: 15}}

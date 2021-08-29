@@ -10,10 +10,9 @@ import Button from './Button';
 import {useNavigation, useRoute} from '@react-navigation/native';
 const DishesDetails = ({data = []}) => {
   const route = useRoute();
-  const navigation = useNavigation();
   const dishDetails = [
     {
-      title: route.params.name,
+      title: route.params ? route.params.name : 'الكبسة',
       description:
         'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال',
       imageUrls: [
