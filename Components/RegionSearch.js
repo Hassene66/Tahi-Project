@@ -62,6 +62,17 @@ const RegionPicker = ({
           swipeDirection="down"
           onBackButtonPress={() => setIsVisible(false)}>
           <View style={styles.list}>
+            <View
+              style={{
+                marginTop: 15,
+                width: 50,
+                borderRadius: 4,
+                height: 9,
+                backgroundColor: '#CCCCCC',
+                justifyContent: 'center',
+                alignSelf: 'center',
+              }}
+            />
             <ItemRadioBtn
               name={name}
               title={placeholder}
@@ -84,6 +95,7 @@ export default RegionPicker;
 const styles = StyleSheet.create({
   container: {alignItems: 'center', flexDirection: 'row'},
   modal: {
+    backgroundColor: 'rgba(0,0,0,0.2)',
     margin: 0,
     alignItems: undefined,
     justifyContent: 'flex-end',

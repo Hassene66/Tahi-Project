@@ -4,9 +4,7 @@ import {
   View,
   TouchableWithoutFeedback,
   Linking,
-  Text,
 } from 'react-native';
-import Modal from 'react-native-modal';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconBackground from './IconBackground';
 const NavigationButton = ({
@@ -17,6 +15,7 @@ const NavigationButton = ({
   color = 'white',
   iconType = '',
   showModal = null,
+  style = {},
 }) => {
   phoneNumber = 54777481;
   return (
@@ -29,9 +28,9 @@ const NavigationButton = ({
           ? Linking.openURL(`sms:${phoneNumber}`)
           : showModal();
       }}>
-      <View>
+      <View style={style}>
         <IconBackground gradientColor={gradientColor}>
-          <View style={[styles.container, {iconStyle}]}>
+          <View style={[styles.container, {...iconStyle}]}>
             <FontAwesome5 name={iconName} color={color} size={size} />
           </View>
         </IconBackground>

@@ -38,7 +38,7 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator
     screenOptions={{headerShown: false}}
-    initialRouteName="HomePage">
+    initialRouteName="SignIn">
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignInNextStep" component={SignInNextStep} />
     <Stack.Screen name="Subscribe" component={Subscribe} />
@@ -55,11 +55,6 @@ const StackNavigator = () => (
 const ChatScreen = () => (
   <Background isInverted>
     <Text>the chat Screen</Text>
-  </Background>
-);
-const OrderScreen = () => (
-  <Background isInverted>
-    <Text>the oder Screen</Text>
   </Background>
 );
 const AccountScreen = () => (

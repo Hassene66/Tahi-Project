@@ -4,7 +4,7 @@ import {TouchableWithoutFeedback, View} from 'react-native';
 import Logo from './Logo';
 import RoundIcon from './RoundIcon';
 
-const LogoV2 = ({navigation}) => {
+const LogoV2 = () => {
   return (
     <View style={{flexDirection: 'row'}}>
       <View

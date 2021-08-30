@@ -181,26 +181,6 @@ const SearchScreen = () => {
     },
   ];
 
-  // const schema = yup.object().shape({
-  //   region: yup.object().required('الرجاء إدخال المنطقة').nullable(),
-  //   searchForChef: yup.string().required('الرجاء إدخال الشيف'),
-  //   services: yup
-  //     .array()
-  //     .required('الرجاء إختيار  الخدمات')
-  //     .test('', 'الرجاء إدخال الخدمات ', arr => {
-  //       if (typeof arr === 'object') {
-  //         return arr.filter(el => el.checked === true).length !== 0;
-  //       } else return false;
-  //     }),
-  //   dishes: yup
-  //     .array()
-  //     .required('الرجاء إختيار  الاطباق')
-  //     .test('', 'الرجاء إدخال الاطباق ', arr => {
-  //       if (typeof arr === 'object') {
-  //         return arr.filter(el => el.checked === true).length !== 0;
-  //       } else return false;
-  //     }),
-  // });
   return (
     <Background isInverted>
       <Form
