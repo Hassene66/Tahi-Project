@@ -14,6 +14,7 @@ const RoundIcon = ({
   pageName = undefined,
   withShadow = true,
   isFontAwesome = true,
+  style = {},
 }) => {
   const navigation = useNavigation();
   const styles = StyleSheet.create({
@@ -48,7 +49,7 @@ const RoundIcon = ({
     <View style={[styles.container, {marginHorizontal: marginHorizontal}]}>
       <TouchableWithoutFeedback
         onPress={pageName && (() => navigation.navigate(pageName))}>
-        <View style={[styles.icon, {backgroundColor: bgColor}]}>
+        <View style={[styles.icon, {backgroundColor: bgColor}, style]}>
           {isFontAwesome ? (
             <FontAwesome5
               name={title}
