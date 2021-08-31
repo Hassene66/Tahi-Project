@@ -25,7 +25,6 @@ const ChefProfileContact = ({showModal}) => {
         <NavigationButton
           iconName="comment-alt"
           gradientColor={['#FF6921', '#FFA23C', '#FFD051']}
-          iconStyle={{marginHorizontal: 20}}
           iconType="message"
         />
 

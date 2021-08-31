@@ -11,7 +11,7 @@ const ChefInfo = ({data: item, isRecent, isLiked, setLiked}) => {
       <View
         // the user view
         style={{
-          height: isRecent ? 130 : 75,
+          height: isRecent ? 130 : 85,
           flexDirection: 'row',
         }}>
         <View
@@ -39,10 +39,7 @@ const ChefInfo = ({data: item, isRecent, isLiked, setLiked}) => {
               flex: 1,
               flexDirection: 'row',
             }}>
-            <View
-              style={{
-                flex: 1,
-              }}>
+            <View>
               <Title
                 text={item.name}
                 titleStyle={{

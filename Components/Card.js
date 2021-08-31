@@ -62,16 +62,28 @@ const Card = ({data: item, isRecent, isLiked, setLiked, withBorder}) => {
               flex: 1,
               flexDirection: 'row',
             }}>
-            <View style={{flex: 1}}>
-              <Title
-                text={item.name}
-                titleStyle={{
-                  fontSize: 17,
-                  marginTop: 0,
-                  paddingRight: 9,
-                  color: 'black',
-                }}
-              />
+            <View>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('ChefProfile', {
+                    chefName: item.name,
+                    ChefStarRating: item.rating,
+                    ChefPlace: item.place,
+                    Cheflocation: item.location,
+                    ChefNumberOfRequests: item.numberOfRequests,
+                    ChefIsLiked: item.liked,
+                  })
+                }>
+                <Title
+                  text={item.name}
+                  titleStyle={{
+                    fontSize: 17,
+                    marginTop: 0,
+                    paddingRight: 9,
+                    color: 'black',
+                  }}
+                />
+              </TouchableOpacity>
             </View>
             <View
               style={{

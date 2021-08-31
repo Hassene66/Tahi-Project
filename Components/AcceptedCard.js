@@ -25,169 +25,171 @@ const AcceptedCard = ({data}) => {
   };
   return (
     <>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={Data}
-        keyExtractor={() => uuid.v4()}
-        renderItem={({
-          item: {
-            id,
-            userName,
-            date,
-            deliveryAdress,
-            details,
-            country,
-            region,
-            blueTags,
-            pinkTags,
-            moreDetails,
-          },
-        }) => (
-          <View style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <View style={styles.firstRow}>
-                <View style={styles.iconContainer}>
-                  <RoundIcon
-                    title="user"
-                    solid
-                    color="#FABD30"
-                    bgColor="#FFF8E7"
-                    size={27}
-                    withShadow={false}
-                    style={styles.icon}
-                  />
-                </View>
-
-                <View style={{flexDirection: 'column'}}>
-                  <Title text={userName} titleStyle={styles.name} />
-                  <View style={{flexDirection: 'row'}}>
-                    <Title text="التاريخ" titleStyle={styles.dateLabel} />
-                    <Title text={date} titleStyle={styles.date} />
-                  </View>
-                </View>
-
-                <View style={styles.leftGrid}>
-                  <Text style={styles.rating}>3.2</Text>
-                  <FontAwesome5 name="star" color="#FF6B21" size={22} solid />
-                  <View style={{flexDirection: 'row'}}>
-                    <NavigationButton
-                      iconName="comment-alt"
-                      size={18}
-                      gradientColor={['#FF6921', '#FFA23C', '#FFD051']}
-                      iconStyle={styles.iconStyle}
-                      style={{marginHorizontal: 7}}
-                      iconType="message"
-                    />
-
-                    <NavigationButton
-                      gradientColor={['#28B228', '#4FCE4D', '#74E76E']}
-                      size={18}
-                      iconStyle={styles.iconStyle}
-                      iconName="phone"
-                      iconType="phone"
+      <View style={{margin: 8, right: 4, left: 1}}>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={Data}
+          keyExtractor={() => uuid.v4()}
+          renderItem={({
+            item: {
+              id,
+              userName,
+              date,
+              deliveryAdress,
+              details,
+              country,
+              region,
+              blueTags,
+              pinkTags,
+              moreDetails,
+            },
+          }) => (
+            <View style={styles.container}>
+              <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={styles.firstRow}>
+                  <View style={styles.iconContainer}>
+                    <RoundIcon
+                      title="user"
+                      solid
+                      color="#FABD30"
+                      bgColor="#FFF8E7"
+                      size={27}
+                      withShadow={false}
+                      style={styles.icon}
                     />
                   </View>
-                </View>
-              </View>
-              <View
-                style={{
-                  backgroundColor: 'rgba(255,95,34,0.1)',
-                  borderRadius: 10,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  padding: 5,
-                  marginVertical: 7,
-                }}>
-                <Text
-                  style={{
-                    fontFamily: 'Cairo-Bold',
-                    fontSize: 21,
-                    color: '#FF5F22',
-                    height: 30,
-                  }}>
-                  420 SAR
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: 'Cairo-Regular',
-                    fontSize: 11,
-                    color: '#FF5F22',
-                  }}>
-                  SAR 2 رسوم طلب مضافة *
-                </Text>
-              </View>
-              <Text style={styles.title}>عنوان الطلب</Text>
-              <Text style={styles.subTitle}>{deliveryAdress}</Text>
-              <Collapsible collapsed={moreDetails}>
-                <Text style={styles.title}>تفاصيل</Text>
-                <Text style={styles.subTitle}>{details}</Text>
-                <Text style={styles.title}>المدينة</Text>
-                <Text style={styles.subTitle}>{country}</Text>
-                <Text style={styles.title}>المنطقة</Text>
-                <Text style={styles.subTitle}>{region}</Text>
 
-                <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-                  {blueTags.map((tag, idx) => (
-                    <View
-                      key={idx}
-                      style={{
-                        backgroundColor: '#EFFCFF',
-                        borderRadius: 10,
-                        alignItems: 'center',
-                        alignSelf: 'flex-start',
-                        paddingHorizontal: 10,
-                        marginHorizontal: 4,
-                        paddingVertical: 5,
-                        marginVertical: 5,
-                      }}>
-                      <Title
-                        text={tag}
-                        titleStyle={{
-                          marginTop: 0,
-                          color: '#30D2FA',
-                          fontSize: 13,
-                        }}
+                  <View style={{flexDirection: 'column'}}>
+                    <Title text={userName} titleStyle={styles.name} />
+                    <View style={{flexDirection: 'row'}}>
+                      <Title text="التاريخ" titleStyle={styles.dateLabel} />
+                      <Title text={date} titleStyle={styles.date} />
+                    </View>
+                  </View>
+
+                  <View style={styles.leftGrid}>
+                    <Text style={styles.rating}>3.2</Text>
+                    <FontAwesome5 name="star" color="#FF6B21" size={22} solid />
+                    <View style={{flexDirection: 'row'}}>
+                      <NavigationButton
+                        iconName="comment-alt"
+                        size={18}
+                        gradientColor={['#FF6921', '#FFA23C', '#FFD051']}
+                        iconStyle={styles.iconStyle}
+                        style={{marginHorizontal: 7}}
+                        iconType="message"
+                      />
+
+                      <NavigationButton
+                        gradientColor={['#28B228', '#4FCE4D', '#74E76E']}
+                        size={18}
+                        iconStyle={styles.iconStyle}
+                        iconName="phone"
+                        iconType="phone"
                       />
                     </View>
-                  ))}
+                  </View>
                 </View>
-                <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-                  {pinkTags.map((tag, idx) => (
-                    <View
-                      key={idx}
-                      style={{
-                        backgroundColor: 'rgba(250, 46, 107, 0.1)',
-                        borderRadius: 10,
-                        alignItems: 'center',
-                        alignSelf: 'flex-start',
-                        paddingHorizontal: 10,
-                        marginHorizontal: 4,
-                        paddingVertical: 5,
-                        marginVertical: 5,
-                      }}>
-                      <Title
-                        text={tag}
-                        titleStyle={{
-                          marginTop: 0,
-                          color: '#FA306D',
-                          fontSize: 13,
-                        }}
-                      />
-                    </View>
-                  ))}
-                </View>
-              </Collapsible>
-              <TouchableWithoutFeedback onPress={() => toggleMoreDetails(id)}>
-                <View style={styles.ToggleBtnContainer}>
-                  <Text style={styles.ToggleBtn}>
-                    {moreDetails ? 'أكثر تفاصيل' : 'أقل تفاصيل'}
+                <View
+                  style={{
+                    backgroundColor: 'rgba(255,95,34,0.1)',
+                    borderRadius: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    padding: 5,
+                    marginVertical: 7,
+                  }}>
+                  <Text
+                    style={{
+                      fontFamily: 'Cairo-Bold',
+                      fontSize: 21,
+                      color: '#FF5F22',
+                      height: 30,
+                    }}>
+                    420 SAR
+                  </Text>
+                  <Text
+                    style={{
+                      fontFamily: 'Cairo-Regular',
+                      fontSize: 11,
+                      color: '#FF5F22',
+                    }}>
+                    SAR 2 رسوم طلب مضافة *
                   </Text>
                 </View>
-              </TouchableWithoutFeedback>
-            </ScrollView>
-          </View>
-        )}
-      />
+                <Text style={styles.title}>عنوان الطلب</Text>
+                <Text style={styles.subTitle}>{deliveryAdress}</Text>
+                <Collapsible collapsed={moreDetails}>
+                  <Text style={styles.title}>تفاصيل</Text>
+                  <Text style={styles.subTitle}>{details}</Text>
+                  <Text style={styles.title}>المدينة</Text>
+                  <Text style={styles.subTitle}>{country}</Text>
+                  <Text style={styles.title}>المنطقة</Text>
+                  <Text style={styles.subTitle}>{region}</Text>
+
+                  <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+                    {blueTags.map((tag, idx) => (
+                      <View
+                        key={idx}
+                        style={{
+                          backgroundColor: '#EFFCFF',
+                          borderRadius: 10,
+                          alignItems: 'center',
+                          alignSelf: 'flex-start',
+                          paddingHorizontal: 10,
+                          marginHorizontal: 4,
+                          paddingVertical: 5,
+                          marginVertical: 5,
+                        }}>
+                        <Title
+                          text={tag}
+                          titleStyle={{
+                            marginTop: 0,
+                            color: '#30D2FA',
+                            fontSize: 13,
+                          }}
+                        />
+                      </View>
+                    ))}
+                  </View>
+                  <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+                    {pinkTags.map((tag, idx) => (
+                      <View
+                        key={idx}
+                        style={{
+                          backgroundColor: 'rgba(250, 46, 107, 0.1)',
+                          borderRadius: 10,
+                          alignItems: 'center',
+                          alignSelf: 'flex-start',
+                          paddingHorizontal: 10,
+                          marginHorizontal: 4,
+                          paddingVertical: 5,
+                          marginVertical: 5,
+                        }}>
+                        <Title
+                          text={tag}
+                          titleStyle={{
+                            marginTop: 0,
+                            color: '#FA306D',
+                            fontSize: 13,
+                          }}
+                        />
+                      </View>
+                    ))}
+                  </View>
+                </Collapsible>
+                <TouchableWithoutFeedback onPress={() => toggleMoreDetails(id)}>
+                  <View style={styles.ToggleBtnContainer}>
+                    <Text style={styles.ToggleBtn}>
+                      {moreDetails ? 'أكثر تفاصيل' : 'أقل تفاصيل'}
+                    </Text>
+                  </View>
+                </TouchableWithoutFeedback>
+              </ScrollView>
+            </View>
+          )}
+        />
+      </View>
     </>
   );
 };

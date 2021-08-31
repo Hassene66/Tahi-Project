@@ -83,7 +83,9 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
                           />
                         </View>
                       ) : (
-                        <Feather name="home" size={27} color="#FFD6B9" />
+                        <View style={{padding: 10}}>
+                          <Feather name="home" size={27} color="#FFD6B9" />
+                        </View>
                       )}
                     </View>
                   )}
@@ -118,11 +120,13 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
                           />
                         </View>
                       ) : (
-                        <FontAwesome5
-                          name="comment-alt"
-                          size={27}
-                          color="#FFD6B9"
-                        />
+                        <View style={{padding: 10}}>
+                          <FontAwesome5
+                            name="comment-alt"
+                            size={27}
+                            color="#FFD6B9"
+                          />
+                        </View>
                       )}
                     </View>
                   )}
@@ -157,11 +161,13 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
                           />
                         </View>
                       ) : (
-                        <FontAwesome5
-                          name="newspaper"
-                          size={27}
-                          color="#FFD6B9"
-                        />
+                        <View style={{padding: 10}}>
+                          <FontAwesome5
+                            name="newspaper"
+                            size={27}
+                            color="#FFD6B9"
+                          />
+                        </View>
                       )}
                     </View>
                   )}
@@ -192,7 +198,9 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
                           />
                         </View>
                       ) : (
-                        <FontAwesome5 name="user" size={27} color="#FFD6B9" />
+                        <View style={{padding: 10}}>
+                          <FontAwesome5 name="user" size={27} color="#FFD6B9" />
+                        </View>
                       )}
                     </View>
                   )}
