@@ -38,7 +38,7 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator
     screenOptions={{headerShown: false}}
-    initialRouteName="SignIn">
+    initialRouteName="HomePage">
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignInNextStep" component={SignInNextStep} />
     <Stack.Screen name="Subscribe" component={Subscribe} />

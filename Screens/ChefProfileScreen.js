@@ -18,16 +18,24 @@ import ImageInputList from '../Components/ImageInputList';
 import Form from '../Components/AppForm';
 import ConfirmationButton from '../Components/ConfirmationButton';
 
-const ChefProfileScreen = () => {
+const ChefProfileScreen = ({route}) => {
+  const {
+    chefName,
+    ChefStarRating,
+    ChefPlace,
+    Cheflocation,
+    ChefNumberOfRequests,
+    ChefIsLiked,
+  } = route.params;
   const ChefData = {
     chefInfo: {
       id: 1,
-      name: 'علي عبد الله',
-      place: 'مكه المكرمة',
-      location: 'منطقة باب المنارة',
-      numberOfRequests: 15,
-      rating: '3.2',
-      liked: false,
+      name: chefName,
+      place: ChefPlace,
+      location: Cheflocation,
+      rating: ChefStarRating,
+      liked: ChefIsLiked,
+      numberOfRequests: ChefNumberOfRequests,
     },
     platePhotos: [
       {name: 'إسم الطبق', url: require('../assets/images/photo1.jpg')},

@@ -25,132 +25,134 @@ const WaitingCard = ({data}) => {
   };
   return (
     <>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={Data}
-        keyExtractor={() => uuid.v4()}
-        renderItem={({
-          item: {
-            id,
-            userName,
-            date,
-            deliveryAdress,
-            details,
-            country,
-            region,
-            blueTags,
-            pinkTags,
-            moreDetails,
-          },
-        }) => (
-          <View style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <View style={styles.firstRow}>
-                <View style={styles.iconContainer}>
-                  <RoundIcon
-                    title="user"
-                    solid
-                    color="#FABD30"
-                    bgColor="#FFF8E7"
-                    size={27}
-                    withShadow={false}
-                    style={styles.icon}
-                  />
-                </View>
+      <View style={{margin: 8, right: 4}}>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={Data}
+          keyExtractor={() => uuid.v4()}
+          renderItem={({
+            item: {
+              id,
+              userName,
+              date,
+              deliveryAdress,
+              details,
+              country,
+              region,
+              blueTags,
+              pinkTags,
+              moreDetails,
+            },
+          }) => (
+            <View style={styles.container}>
+              <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={styles.firstRow}>
+                  <View style={styles.iconContainer}>
+                    <RoundIcon
+                      title="user"
+                      solid
+                      color="#FABD30"
+                      bgColor="#FFF8E7"
+                      size={27}
+                      withShadow={false}
+                      style={styles.icon}
+                    />
+                  </View>
 
-                <View style={{flexDirection: 'column'}}>
-                  <Title text={userName} titleStyle={styles.name} />
-                  <View style={{flexDirection: 'row'}}>
-                    <Title text="التاريخ" titleStyle={styles.dateLabel} />
-                    <Title text={date} titleStyle={styles.date} />
+                  <View style={{flexDirection: 'column'}}>
+                    <Title text={userName} titleStyle={styles.name} />
+                    <View style={{flexDirection: 'row'}}>
+                      <Title text="التاريخ" titleStyle={styles.dateLabel} />
+                      <Title text={date} titleStyle={styles.date} />
+                    </View>
+                  </View>
+
+                  <View style={styles.leftGrid}>
+                    <Text style={styles.rating}>3.2</Text>
+                    <FontAwesome5 name="star" color="#FF6B21" size={22} solid />
+                    <LinearGradient
+                      colors={['#EB0E0E', '#FF8181']}
+                      start={{x: 0, y: 0}}
+                      end={{x: 1, y: 0}}
+                      style={styles.btnContainer}>
+                      <Text style={styles.btn}>إلغاء</Text>
+                    </LinearGradient>
                   </View>
                 </View>
 
-                <View style={styles.leftGrid}>
-                  <Text style={styles.rating}>3.2</Text>
-                  <FontAwesome5 name="star" color="#FF6B21" size={22} solid />
-                  <LinearGradient
-                    colors={['#EB0E0E', '#FF8181']}
-                    start={{x: 0, y: 0}}
-                    end={{x: 1, y: 0}}
-                    style={styles.btnContainer}>
-                    <Text style={styles.btn}>إلغاء</Text>
-                  </LinearGradient>
-                </View>
-              </View>
+                <Text style={styles.title}>عنوان الطلب</Text>
+                <Text style={styles.subTitle}>{deliveryAdress}</Text>
+                <Collapsible collapsed={moreDetails}>
+                  <Text style={styles.title}>تفاصيل</Text>
+                  <Text style={styles.subTitle}>{details}</Text>
+                  <Text style={styles.title}>المدينة</Text>
+                  <Text style={styles.subTitle}>{country}</Text>
+                  <Text style={styles.title}>المنطقة</Text>
+                  <Text style={styles.subTitle}>{region}</Text>
 
-              <Text style={styles.title}>عنوان الطلب</Text>
-              <Text style={styles.subTitle}>{deliveryAdress}</Text>
-              <Collapsible collapsed={moreDetails}>
-                <Text style={styles.title}>تفاصيل</Text>
-                <Text style={styles.subTitle}>{details}</Text>
-                <Text style={styles.title}>المدينة</Text>
-                <Text style={styles.subTitle}>{country}</Text>
-                <Text style={styles.title}>المنطقة</Text>
-                <Text style={styles.subTitle}>{region}</Text>
-
-                <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-                  {blueTags.map((tag, idx) => (
-                    <View
-                      key={idx}
-                      style={{
-                        backgroundColor: '#EFFCFF',
-                        borderRadius: 10,
-                        alignItems: 'center',
-                        alignSelf: 'flex-start',
-                        paddingHorizontal: 10,
-                        marginHorizontal: 4,
-                        paddingVertical: 5,
-                        marginVertical: 5,
-                      }}>
-                      <Title
-                        text={tag}
-                        titleStyle={{
-                          marginTop: 0,
-                          color: '#30D2FA',
-                          fontSize: 13,
-                        }}
-                      />
-                    </View>
-                  ))}
-                </View>
-                <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-                  {pinkTags.map((tag, idx) => (
-                    <View
-                      key={idx}
-                      style={{
-                        backgroundColor: 'rgba(250, 46, 107, 0.1)',
-                        borderRadius: 10,
-                        alignItems: 'center',
-                        alignSelf: 'flex-start',
-                        paddingHorizontal: 10,
-                        marginHorizontal: 4,
-                        paddingVertical: 5,
-                        marginVertical: 5,
-                      }}>
-                      <Title
-                        text={tag}
-                        titleStyle={{
-                          marginTop: 0,
-                          color: '#FA306D',
-                          fontSize: 13,
-                        }}
-                      />
-                    </View>
-                  ))}
-                </View>
-              </Collapsible>
-              <TouchableWithoutFeedback onPress={() => toggleMoreDetails(id)}>
-                <View style={styles.ToggleBtnContainer}>
-                  <Text style={styles.ToggleBtn}>
-                    {moreDetails ? 'أكثر تفاصيل' : 'أقل تفاصيل'}
-                  </Text>
-                </View>
-              </TouchableWithoutFeedback>
-            </ScrollView>
-          </View>
-        )}
-      />
+                  <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+                    {blueTags.map((tag, idx) => (
+                      <View
+                        key={idx}
+                        style={{
+                          backgroundColor: '#EFFCFF',
+                          borderRadius: 10,
+                          alignItems: 'center',
+                          alignSelf: 'flex-start',
+                          paddingHorizontal: 10,
+                          marginHorizontal: 4,
+                          paddingVertical: 5,
+                          marginVertical: 5,
+                        }}>
+                        <Title
+                          text={tag}
+                          titleStyle={{
+                            marginTop: 0,
+                            color: '#30D2FA',
+                            fontSize: 13,
+                          }}
+                        />
+                      </View>
+                    ))}
+                  </View>
+                  <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+                    {pinkTags.map((tag, idx) => (
+                      <View
+                        key={idx}
+                        style={{
+                          backgroundColor: 'rgba(250, 46, 107, 0.1)',
+                          borderRadius: 10,
+                          alignItems: 'center',
+                          alignSelf: 'flex-start',
+                          paddingHorizontal: 10,
+                          marginHorizontal: 4,
+                          paddingVertical: 5,
+                          marginVertical: 5,
+                        }}>
+                        <Title
+                          text={tag}
+                          titleStyle={{
+                            marginTop: 0,
+                            color: '#FA306D',
+                            fontSize: 13,
+                          }}
+                        />
+                      </View>
+                    ))}
+                  </View>
+                </Collapsible>
+                <TouchableWithoutFeedback onPress={() => toggleMoreDetails(id)}>
+                  <View style={styles.ToggleBtnContainer}>
+                    <Text style={styles.ToggleBtn}>
+                      {moreDetails ? 'أكثر تفاصيل' : 'أقل تفاصيل'}
+                    </Text>
+                  </View>
+                </TouchableWithoutFeedback>
+              </ScrollView>
+            </View>
+          )}
+        />
+      </View>
     </>
   );
 };
@@ -177,9 +179,9 @@ const styles = StyleSheet.create({
   btn: {
     fontFamily: 'Cairo-Bold',
     color: 'white',
-    fontSize: 17,
-    paddingHorizontal: 25,
-    paddingVertical: 10,
+    fontSize: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 8,
   },
   rating: {color: '#FF6B21', paddingLeft: 6},
   leftGrid: {
