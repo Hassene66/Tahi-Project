@@ -9,7 +9,7 @@
 
 ![Python](https://img.shields.io/badge/React--native-0.64.2-orange)
 ![Current Version](https://img.shields.io/badge/version-v1.0-blue)
-![GitHub contributors](https://img.shields.io/github/contributors/Hassene66/IsammLabs)
+![GitHub contributors](https://img.shields.io/github/contributors/Hassene66/Tahi-Project)
 ![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 </div>
