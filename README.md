@@ -65,7 +65,7 @@ $ npm run ios
 
 
 
-## Project  overview
+## Project overview
 
 
 | | | | |
@@ -77,5 +77,5 @@ $ npm run ios
 
 ## You may also like
 
-- [HiCoach](https://github.com/salimkazdaghli/Hicotech-Frontend) - A coaching web app.
+- [Electro](https://github.com/Hassene66/Flask_React_Project) - A price tracking web app.
 - [ISAMM Labs](https://github.com/Hassene66/IsammLabs) - A laboratories managment system mobile app.
